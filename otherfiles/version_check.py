@@ -20,7 +20,7 @@ CHANGELOG_ITEMS = [
     "https://github.com/sepandhaghighi/capo/compare/v{0}...dev",
     "[{0}]:"]
 
-PARAMS_ITEMS = ['MY_COFFEE_VERSION = "{0}"']
+PARAMS_ITEMS = ['CAPO_VERSION = "{0}"']
 ISSUE_TEMPLATE_ITEMS = ["- Capo {0}"]
 SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
 

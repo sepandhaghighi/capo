@@ -2,7 +2,7 @@
 """capo functions."""
 from typing import List
 from .params import NOTES_SHARP, NOTES_FLAT
-from .params import ENHARMONIC_EQUIVALENTS, REVERSE_EQUIVALENTS
+from .params import ENHARMONIC_EQUIVALENTS
 
 
 

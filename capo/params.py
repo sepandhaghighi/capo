@@ -15,5 +15,3 @@ ENHARMONIC_EQUIVALENTS = {
     "Ab": "G#",
     "Bb": "A#"
 }
-
-REVERSE_EQUIVALENTS = {v: k for k, v in ENHARMONIC_EQUIVALENTS.items()}

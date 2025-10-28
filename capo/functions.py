@@ -5,7 +5,6 @@ from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 
 
-
 def _normalize_root(root: str) -> str:
     """
     Normalize a root note to its sharp representation.
@@ -80,13 +79,13 @@ def _transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str
         suffix=suffix)
 
 
-def capo_map(chords, current_capo: int, target_capo: int, flat_mode: bool = False) -> List[str]:
+def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False) -> List[str]:
     """
     Map a list of chords from current capo to target capo position.
 
     :param chords: chords list
-    :param current_capo: current capo position
     :param target_capo: target capo position
+    :param current_capo: current capo position
     :param flat_mode: flat mode flag
     """
     if not isinstance(chords, list):

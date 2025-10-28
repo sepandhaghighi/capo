@@ -48,15 +48,11 @@ def transpose_root(root: str, semitones: int, flat_mode: bool = False) -> str:
     :param semitones: semitones
     :param flat_mode: flat mode flag
     """
-    notes = NOTES_FLAT if flat_mode else NOTES_SHARP
     root_sharp = normalize_root(root)
+    notes_system = NOTES_FLAT if flat_mode else NOTES_SHARP
     old_index = NOTES_SHARP.index(root_sharp)
     new_index = (old_index + semitones) % 12
-    new_root = NOTES_SHARP[new_index]
-
-    if flat_mode and new_root in REVERSE_EQUIVALENTS:
-        new_root = REVERSE_EQUIVALENTS[new_root]
-    return new_root
+    return notes_system[new_index]
 
 
 def transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str:

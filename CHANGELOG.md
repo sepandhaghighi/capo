@@ -7,10 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ## [0.1] - 2025-xx-xx
 ### Added
-- Item1
-- Item2
-- Item3
-- Item3
+- `capo_map` function
 
 [Unreleased]: https://github.com/sepandhaghighi/capo/compare/v0.1...dev
 [0.1]: https://github.com/sepandhaghighi/capo/compare/3f293b1...v0.1

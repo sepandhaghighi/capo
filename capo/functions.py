@@ -3,6 +3,7 @@
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS, REVERSE_EQUIVALENTS
 
+
 def normalize_root(root: str) -> str:
     """
     Normalize a root note to its sharp representation.
@@ -69,8 +70,12 @@ def transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str:
     new_root = transpose_root(root, semitones, flat_mode)
     new_bass = transpose_root(bass, semitones, flat_mode) if bass else None
 
-    return "{new_root}{suffix}/{new_bass}".format(new_root=new_root, suffix=suffix, new_bass=new_bass) if new_bass else "{new_root}{suffix}".format(new_root=new_root, suffix=suffix)
-
+    return "{new_root}{suffix}/{new_bass}".format(
+        new_root=new_root,
+        suffix=suffix,
+        new_bass=new_bass) if new_bass else "{new_root}{suffix}".format(
+        new_root=new_root,
+        suffix=suffix)
 
 
 def capo_map(chords, current_capo: int, target_capo: int, flat_mode: bool = False):

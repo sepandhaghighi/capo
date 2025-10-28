@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
+from .params import NOTES_SHARP, NOTES_FLAT
+from .params import ENHARMONIC_EQUIVALENTS, REVERSE_EQUIVALENTS
 
 def normalize_root(root: str) -> str:
     """

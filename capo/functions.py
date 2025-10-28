@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
+from typing import List
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS, REVERSE_EQUIVALENTS
+
 
 
 def _normalize_root(root: str) -> str:
@@ -78,7 +80,7 @@ def _transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str
         suffix=suffix)
 
 
-def capo_map(chords, current_capo: int, target_capo: int, flat_mode: bool = False):
+def capo_map(chords, current_capo: int, target_capo: int, flat_mode: bool = False) -> List[str]:
     """
     Map a list of chords from current capo to target capo position.
 

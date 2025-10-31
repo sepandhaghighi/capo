@@ -4,7 +4,7 @@ from typing import List, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
-from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITIONS_ERROR_MESSAGE
+from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITIONS_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE
 
 def _is_int(number: Any):
     """
@@ -133,4 +133,10 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     _validate_capo_positions(target_capo, current_capo)
 
     semitone_shift = target_capo - current_capo
-    return [_transpose_chord(ch, -semitone_shift, flat_mode) for ch in chords]
+    result = []
+    for chord in chords:
+        try:
+            result.append(_transpose_chord(chord, -semitone_shift, flat_mode))
+        except Exception:
+            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+    return result

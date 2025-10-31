@@ -5,13 +5,13 @@ from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 
 
-def _normalize_root(root: str) -> str:
+def _normalize_note(note: str) -> str:
     """
-    Normalize a root note to its sharp representation.
+    Normalize a note to its sharp representation.
 
-    :param root: root note
+    :param note: input note
     """
-    return ENHARMONIC_EQUIVALENTS.get(root, root)
+    return ENHARMONIC_EQUIVALENTS.get(note, note)
 
 
 def _extract_parts(chord: str) -> tuple:
@@ -32,29 +32,29 @@ def _extract_parts(chord: str) -> tuple:
         root = main[:1]
         suffix = main[1:]
 
-    root = _normalize_root(root)
+    root = _normalize_note(root)
     if bass:
         if len(bass) > 1 and bass[1] in ['#', 'b']:
-            bass_root = _normalize_root(bass[:2])
+            bass_root = _normalize_note(bass[:2])
         else:
-            bass_root = _normalize_root(bass[:1])
+            bass_root = _normalize_note(bass[:1])
     else:
         bass_root = None
 
     return root, suffix, bass_root
 
 
-def _transpose_root(root: str, semitones: int, flat_mode: bool = False) -> str:
+def _transpose_note(note: str, semitones: int, flat_mode: bool = False) -> str:
     """
-    Transpose a root note by given semitones.
+    Transpose a note by given semitones.
 
-    :param root: root note
+    :param note: input note
     :param semitones: semitones
     :param flat_mode: flat mode flag
     """
-    root_sharp = _normalize_root(root)
+    note_sharp = _normalize_note(note)
     notes_system = NOTES_FLAT if flat_mode else NOTES_SHARP
-    old_index = NOTES_SHARP.index(root_sharp)
+    old_index = NOTES_SHARP.index(note_sharp)
     new_index = (old_index + semitones) % 12
     return notes_system[new_index]
 
@@ -68,8 +68,8 @@ def _transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str
     :param flat_mode: flat mode flag
     """
     root, suffix, bass = _extract_parts(chord)
-    new_root = _transpose_root(root, semitones, flat_mode)
-    new_bass = _transpose_root(bass, semitones, flat_mode) if bass else None
+    new_root = _transpose_note(root, semitones, flat_mode)
+    new_bass = _transpose_note(bass, semitones, flat_mode) if bass else None
 
     return "{new_root}{suffix}/{new_bass}".format(
         new_root=new_root,

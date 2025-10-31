@@ -15,3 +15,5 @@ ENHARMONIC_EQUIVALENTS = {
     "Ab": "G#",
     "Bb": "A#"
 }
+
+CHORDS_TYPE_ERROR_MESSAGE = "`chords` must be a list of strings."

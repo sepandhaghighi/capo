@@ -1,9 +1,22 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
-from typing import List
+from typing import List, Any
+from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
+from .params import CHORDS_TYPE_ERROR_MESSAGE
 
+def _validate_chords(chords: Any) -> bool:
+    """
+    Validate chords.
+
+    :param chords: chords list
+    """
+    if not isinstance(chords, list):
+        raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
+    if not all(isinstance(ch, str) for ch in chords):
+        raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
+    return True
 
 def _normalize_note(note: str) -> str:
     """
@@ -88,11 +101,13 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     :param current_capo: current capo position
     :param flat_mode: flat mode flag
     """
-    if not isinstance(chords, list):
-        raise TypeError("chords must be a list of strings")
 
-    if not all(isinstance(ch, str) for ch in chords):
-        raise TypeError("all chords must be strings")
+    _validate_chords(chords)
+    if not isinstance(current_capo, int) or not isinstance(target_capo, int):
+        raise CapoValidationError("capo positions must be integers")
+
+    if current_capo < 0 or target_capo < 0:
+        raise CapoValidationError("capo positions must be non-negative integers")
 
     semitone_shift = target_capo - current_capo
     return [_transpose_chord(ch, -semitone_shift, flat_mode) for ch in chords]

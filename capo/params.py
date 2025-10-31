@@ -17,3 +17,4 @@ ENHARMONIC_EQUIVALENTS = {
 }
 
 CHORDS_TYPE_ERROR_MESSAGE = "`chords` must be a list of strings."
+CAPO_POSITIONS_ERROR_MESSAGE = "capo positions must be non-negative integers."

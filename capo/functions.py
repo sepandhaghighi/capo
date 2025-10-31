@@ -7,7 +7,7 @@ from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITIONS_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE
 
 
-def _is_int(number: Any):
+def _is_int(number: Any) -> bool:
     """
     Check that input number is integer or not.
 

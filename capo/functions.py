@@ -29,7 +29,7 @@ def _validate_chords(chords: Any) -> bool:
     """
     if not isinstance(chords, list):
         raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
-    if not all(isinstance(ch, str) for ch in chords):
+    if not all(isinstance(chord, str) for chord in chords):
         raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
     return True
 

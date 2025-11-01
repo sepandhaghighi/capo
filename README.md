@@ -53,7 +53,13 @@
 
 ## Usage
 
-TODO ...
+```pycon
+>>> from capo import capo_map
+>>> capo_map(["A", "Em", "C", "G"], target_capo=2, current_capo=0)
+['G', 'Dm', 'A#', 'F']
+>>> capo_map(["A", "Em", "C", "G"], target_capo=2, current_capo=0, flat_mode=True)
+['G', 'Dm', 'Bb', 'F']
+```
 
 ## Issues & Bug Reports			
 

@@ -4,7 +4,7 @@ from typing import List, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
-from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITIONS_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE
+from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE
 
 
 def _is_int(number: Any) -> bool:
@@ -34,7 +34,7 @@ def _validate_chords(chords: Any) -> bool:
     return True
 
 
-def _validate_capo_positions(target_capo: Any, current_capo: Any) -> bool:
+def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
     """
     Validate capo position.
 
@@ -42,9 +42,9 @@ def _validate_capo_positions(target_capo: Any, current_capo: Any) -> bool:
     :param current_capo: current capo position
     """
     if not _is_int(current_capo) or not _is_int(target_capo):
-        raise CapoValidationError(CAPO_POSITIONS_ERROR_MESSAGE)
+        raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
     if current_capo < 0 or target_capo < 0:
-        raise CapoValidationError(CAPO_POSITIONS_ERROR_MESSAGE)
+        raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
     return True
 
 

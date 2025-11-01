@@ -42,7 +42,7 @@ setup(
     author_email='me@sepand.tech',
     url='https://github.com/sepandhaghighi/capo',
     download_url='https://github.com/sepandhaghighi/capo/tarball/v0.1',
-    keywords="TODO",
+    keywords="capo guitar chord music music-theory transpose",
     project_urls={
         'Source': 'https://github.com/sepandhaghighi/capo'
     },
@@ -67,6 +67,8 @@ setup(
         'Intended Audience :: Other Audience',
         'Topic :: Games/Entertainment',
         'Topic :: Utilities',
+        'Topic :: Multimedia :: Sound/Audio :: Analysis',
+        'Topic :: Multimedia :: Sound/Audio :: Conversion',
     ],
     license='MIT',
 )

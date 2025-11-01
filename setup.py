@@ -24,14 +24,17 @@ def read_description() -> str:
             description += c.read()
         return description
     except Exception:
-        return '''TODO'''
+        return '''Capo is a lightweight Python library for guitarists and developers that provides precise chord transposition across capo positions.
+        It allows users to easily convert chord progressions from one capo setting to another, supporting sharps, flats, complex chord types, and slash chords.
+        Whether you’re building a songwriting assistant, a practice tool, or a music theory application,
+        Capo delivers a clear, reliable foundation for working with chord mappings and capo calculations in Python.'''
 
 
 setup(
     name='capo',
     packages=['capo'],
     version='0.1',
-    description='TODO',
+    description='Capo: A Python library for guitar chord transposition',
     long_description=read_description(),
     long_description_content_type='text/markdown',
     include_package_data=True,

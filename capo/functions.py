@@ -1,8 +1,51 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
-from typing import List
+from typing import List, Any
+from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
+from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE
+
+
+def _is_int(number: Any) -> bool:
+    """
+    Check that input number is integer or not.
+
+    :param number: input number
+    """
+    try:
+        if int(number) == number:
+            return True
+        return False
+    except Exception:
+        return False
+
+
+def _validate_chords(chords: Any) -> bool:
+    """
+    Validate chords.
+
+    :param chords: chords list
+    """
+    if not isinstance(chords, list):
+        raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
+    if not all(isinstance(chord, str) for chord in chords):
+        raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
+    return True
+
+
+def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
+    """
+    Validate capo position.
+
+    :param target_capo: target capo position
+    :param current_capo: current capo position
+    """
+    if not _is_int(current_capo) or not _is_int(target_capo):
+        raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
+    if current_capo < 0 or target_capo < 0:
+        raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
+    return True
 
 
 def _normalize_note(note: str) -> str:
@@ -88,11 +131,15 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     :param current_capo: current capo position
     :param flat_mode: flat mode flag
     """
-    if not isinstance(chords, list):
-        raise TypeError("chords must be a list of strings")
 
-    if not all(isinstance(ch, str) for ch in chords):
-        raise TypeError("all chords must be strings")
+    _validate_chords(chords)
+    _validate_capo_position(target_capo, current_capo)
 
     semitone_shift = target_capo - current_capo
-    return [_transpose_chord(ch, -semitone_shift, flat_mode) for ch in chords]
+    result = []
+    for chord in chords:
+        try:
+            result.append(_transpose_chord(chord, -semitone_shift, flat_mode))
+        except Exception:
+            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+    return result

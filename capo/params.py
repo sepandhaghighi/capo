@@ -15,3 +15,7 @@ ENHARMONIC_EQUIVALENTS = {
     "Ab": "G#",
     "Bb": "A#"
 }
+
+CHORDS_TYPE_ERROR_MESSAGE = "`chords` must be a list of strings."
+CAPO_POSITION_ERROR_MESSAGE = "capo position must be a non-negative integer."
+CHORD_FORMAT_ERROR_MESSAGE = "invalid chord format or unknown note: `{chord}`"

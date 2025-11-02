@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Capo: A Python library for guitar chord transposition</h1>
+<h1>Capo: A Python Library for Guitar Chord Transposition</h1>
 <br/>
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
 <a href="https://github.com/sepandhaghighi/capo"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/sepandhaghighi/capo"></a>

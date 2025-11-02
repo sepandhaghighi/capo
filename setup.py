@@ -34,7 +34,7 @@ setup(
     name='capo',
     packages=['capo'],
     version='0.1',
-    description='Capo: A Python library for guitar chord transposition',
+    description='Capo: A Python Library for Guitar Chord Transposition',
     long_description=read_description(),
     long_description_content_type='text/markdown',
     include_package_data=True,

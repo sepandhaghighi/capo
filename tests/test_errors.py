@@ -35,5 +35,5 @@ def test_capo_position_error4():
 
 
 def test_chord_format_error():
-    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `{s}`"):
-        _ = capo_map(chords={"A", "Am", "s"}, current_capo=0, target_capo=2)
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
+        _ = capo_map(chords=["A", "Am", "s"], current_capo=0, target_capo=2)

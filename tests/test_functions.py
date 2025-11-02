@@ -53,6 +53,26 @@ def test_capo_map_flat_chords3():
     assert result == ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
 
 
+def test_capo_map_slash_chords1():  # Reference: https://muted.io/chord-transposer/
+    result = capo_map(["C/G", "A", "C", "D"], current_capo=0, target_capo=1)
+    assert result == ['B/F#', 'G#', 'B', 'C#']
+
+
+def test_capo_map_slash_chords2():  # Reference: https://muted.io/chord-transposer/
+    result = capo_map(["D/F#", "A/C#", "D/B", "E/C#"], current_capo=0, target_capo=3)
+    assert result == ['B/D#', 'F#/A#', 'B/G#', 'C#/A#']
+
+
+def test_capo_map_complex_chords1():  # Reference: https://muted.io/chord-transposer/
+    result = capo_map(["Fmaj7", "Bb7", "Cmaj7", "Dm", "Cm"], current_capo=0, target_capo=4)
+    assert result == ['C#maj7', 'F#7', 'G#maj7', 'A#m', 'G#m']
+
+
+def test_capo_map_complex_chords2():  # Reference: https://muted.io/chord-transposer/
+    result = capo_map(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], current_capo=0, target_capo=3)
+    assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']
+
+
 
 
 

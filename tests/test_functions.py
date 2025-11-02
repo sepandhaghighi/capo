@@ -33,7 +33,7 @@ def test_capo_map_sharp_chords6():
     # Reference1: https://www.guitarplayerbox.com/chord/list/capo/calculator/
     # Reference2: https://www.musictheoryacademy.com/understanding-music/enharmonic-equivalents/
     result = capo_map(chords=['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'], current_capo=3, target_capo=6, flat_mode=True)
-    assert result == ['Ab', 'A', 'A#', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'Bb']
+    assert result == ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
 
 
 def test_capo_map_flat_chords1():  # Reference: https://bjmorrissey.github.io/capo_calculator/

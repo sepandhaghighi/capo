@@ -71,8 +71,3 @@ def test_capo_map_complex_chords1():  # Reference: https://muted.io/chord-transp
 def test_capo_map_complex_chords2():  # Reference: https://muted.io/chord-transposer/
     result = capo_map(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], current_capo=0, target_capo=3)
     assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']
-
-
-
-
-

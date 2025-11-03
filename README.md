@@ -70,7 +70,7 @@ Just fill an issue and describe it. We'll check it ASAP!
 
 ## References
 
-TODO ...
+<blockquote>1- <a href="https://www.guitarplayerbox.com/chord/list/capo/calculator/">Guitar chords capo calculator  - GuitarPlayerBox</a></blockquote>
 
 ## Show Your Support
 								

@@ -131,7 +131,6 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     :param current_capo: current capo position
     :param flat_mode: flat mode flag
     """
-
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
 

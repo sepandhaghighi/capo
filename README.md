@@ -70,7 +70,14 @@ Just fill an issue and describe it. We'll check it ASAP!
 
 ## References
 
-TODO ...
+<blockquote>1- <a href="https://www.guitarplayerbox.com/chord/list/capo/calculator/">Guitar chords capo calculator  - GuitarPlayerBox</a></blockquote>
+
+<blockquote>2- <a href="https://www.musictheoryacademy.com/understanding-music/enharmonic-equivalents/">Enharmonic Equivalents - Music Theory Academy</a></blockquote>
+
+<blockquote>3- <a href="https://bjmorrissey.github.io/capo_calculator/">Capo Calculator</a></blockquote>
+
+<blockquote>4- <a href="https://muted.io/chord-transposer/">Chord Transposer: Online Tool to Transpose Chords</a></blockquote>
+
 
 ## Show Your Support
 								

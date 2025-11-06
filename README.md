@@ -37,6 +37,13 @@
 		<td align="center"><img src="https://github.com/sepandhaghighi/capo/actions/workflows/test.yml/badge.svg?branch=dev"></td>
 	</tr>
 </table>
+<table>
+    <tr> 
+        <td align="center">Code Quality</td>
+        <td align="center"><a href="https://www.codefactor.io/repository/github/sepandhaghighi/capo"><img src="https://www.codefactor.io/repository/github/sepandhaghighi/capo/badge" alt="CodeFactor"></a></td>
+        <td align="center"><a href="https://app.codacy.com/gh/sepandhaghighi/capo/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/1b9fef09bee3491392a76b7273177580"></a></td>
+    </tr>
+</table>
 
 
 ## Installation		

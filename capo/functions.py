@@ -158,7 +158,7 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
 def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
     """
     Transpose chords by semitones.
-    
+
     :param chords: chords list
     :param semitones: semitones
     :param flat_mode: flat mode flag

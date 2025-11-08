@@ -71,3 +71,55 @@ def test_capo_map_complex_chords1():  # Reference: https://muted.io/chord-transp
 def test_capo_map_complex_chords2():  # Reference: https://muted.io/chord-transposer/
     result = capo_map(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], current_capo=0, target_capo=3)
     assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']
+
+
+def test_transpose_sharp_chords1():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], semitones=0)
+    assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+
+def test_transpose_sharp_chords2(): # Reference: https://muted.io/chord-transposer/
+    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], semitones=-1)
+    assert result == ['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#']
+
+
+def test_transpose_sharp_chords3():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], semitones=2)
+    assert result == ["D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#"]
+
+
+def test_transpose_flat_chords1():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], semitones=-2)
+    assert result == ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A']
+
+
+def test_transpose_flat_chords2():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], semitones=-4)
+    assert result == ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G']
+
+
+def test_transpose_flat_chords3():
+    # Reference1: https://muted.io/chord-transposer/
+    # Reference2: https://www.musictheoryacademy.com/understanding-music/enharmonic-equivalents/
+    result = transpose(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], semitones=-4, flat_mode=True)
+    assert result == ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G']
+
+
+def test_transpose_slash_chords1():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(["C/G", "A", "C", "D"], semitones=-1)
+    assert result == ['B/F#', 'G#', 'B', 'C#']
+
+
+def test_transpose_slash_chords2():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(["D/F#", "A/C#", "D/B", "E/C#"], semitones=-3)
+    assert result == ['B/D#', 'F#/A#', 'B/G#', 'C#/A#']
+
+
+def test_transpose_complex_chords1():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(["Fmaj7", "Bb7", "Cmaj7", "Dm", "Cm"], semitones=-4)
+    assert result == ['C#maj7', 'F#7', 'G#maj7', 'A#m', 'G#m']
+
+
+def test_transpose_complex_chords2():  # Reference: https://muted.io/chord-transposer/
+    result = transpose(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], semitones=-3)
+    assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']

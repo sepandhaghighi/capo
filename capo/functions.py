@@ -142,3 +142,20 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result
+
+
+def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
+    """
+    Transpose chords by semitones.
+    :param chords: chords list
+    :param semitones: semitones
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    result = []
+    for chord in chords:
+        try:
+            result.append(_transpose_chord(chord, semitones, flat_mode))
+        except Exception:
+            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+    return result

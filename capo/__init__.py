@@ -2,5 +2,5 @@
 """capo modules."""
 from capo.params import CAPO_VERSION
 from capo.errors import CapoValidationError
-from capo.functions import capo_map
+from capo.functions import capo_map, transpose
 __version__ = CAPO_VERSION

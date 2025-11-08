@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `transpose` function
 ### Changed
 - `README.md` updated
+- Test system modified
 ## [0.1] - 2025-11-05
 ### Added
 - `capo_map` function

@@ -1,6 +1,7 @@
 <div align="center">
 <h1>Capo: A Python Library for Guitar Chord Transposition</h1>
 <br/>
+<a href="https://codecov.io/gh/sepandhaghighi/capo"><img src="https://codecov.io/gh/sepandhaghighi/capo/graph/badge.svg?token=usSRXlFCQe"></a>
 <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
 <a href="https://github.com/sepandhaghighi/capo"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/sepandhaghighi/capo"></a>
 <a href="https://badge.fury.io/py/capo"><img src="https://badge.fury.io/py/capo.svg" alt="PyPI version"></a>
@@ -36,6 +37,13 @@
 		<td align="center"><img src="https://github.com/sepandhaghighi/capo/actions/workflows/test.yml/badge.svg?branch=main"></td>
 		<td align="center"><img src="https://github.com/sepandhaghighi/capo/actions/workflows/test.yml/badge.svg?branch=dev"></td>
 	</tr>
+</table>
+<table>
+    <tr> 
+        <td align="center">Code Quality</td>
+        <td align="center"><a href="https://www.codefactor.io/repository/github/sepandhaghighi/capo"><img src="https://www.codefactor.io/repository/github/sepandhaghighi/capo/badge" alt="CodeFactor"></a></td>
+        <td align="center"><a href="https://app.codacy.com/gh/sepandhaghighi/capo/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/1b9fef09bee3491392a76b7273177580"></a></td>
+    </tr>
 </table>
 
 

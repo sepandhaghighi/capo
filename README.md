@@ -61,12 +61,24 @@
 
 ## Usage
 
+### Capo Map
+
 ```pycon
 >>> from capo import capo_map
 >>> capo_map(["A", "Em", "C", "G"], target_capo=2, current_capo=0)
 ['G', 'Dm', 'A#', 'F']
 >>> capo_map(["A", "Em", "C", "G"], target_capo=2, current_capo=0, flat_mode=True)
 ['G', 'Dm', 'Bb', 'F']
+```
+
+### Transpose
+
+```pycon
+>>> from capo import transpose
+>>> transpose(["A", "E", "Cm", "G", "Fmaj7"], semitones=3)
+['C', 'G', 'D#m', 'A#', 'G#maj7']
+>>> transpose(["A", "E", "Cm", "G", "Fmaj7"], semitones=3, flat_mode=True)
+['C', 'G', 'Ebm', 'Bb', 'Abmaj7']
 ```
 
 ## Issues & Bug Reports			

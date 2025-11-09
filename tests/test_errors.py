@@ -44,16 +44,16 @@ def test_capo_map_capo_position_error4():
         _ = capo_map(chords=["A", "Am", "D"], current_capo=1.2, target_capo=4)
 
 
-def test_semitones_error():
+def test_transpose_semitones_error():
     with pytest.raises(CapoValidationError, match=r"`semitones` must be an integer."):
         _ = transpose(chords=["A", "Am", "D"], semitones=1.3)
 
 
-def test_chord_format_error1():
+def test_capo_map_chord_format_error():
     with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
         _ = capo_map(chords=["A", "Am", "s"], current_capo=0, target_capo=2)
 
 
-def test_chord_format_error2():
+def test_transpose_chord_format_error():
     with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
         _ = transpose(chords=["A", "Am", "s"], semitones=2)

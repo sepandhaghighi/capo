@@ -4,7 +4,7 @@ from typing import List, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
-from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE
+from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_ERROR_MESSAGE
 
 
 def _is_int(number: Any) -> bool:
@@ -45,6 +45,17 @@ def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
         raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
     if current_capo < 0 or target_capo < 0:
         raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
+    return True
+
+
+def _validate_semitones(semitones: Any) -> bool:
+    """
+    Validate semitones.
+
+    :param semitones: semitones
+    """
+    if not _is_int(semitones):
+        raise CapoValidationError(SEMITONES_ERROR_MESSAGE)
     return True
 
 
@@ -139,6 +150,25 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     for chord in chords:
         try:
             result.append(_transpose_chord(chord, -semitone_shift, flat_mode))
+        except Exception:
+            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+    return result
+
+
+def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
+    """
+    Transpose chords by semitones.
+
+    :param chords: chords list
+    :param semitones: semitones
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    _validate_semitones(semitones)
+    result = []
+    for chord in chords:
+        try:
+            result.append(_transpose_chord(chord, semitones, flat_mode))
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result

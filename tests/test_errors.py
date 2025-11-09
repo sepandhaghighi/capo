@@ -24,22 +24,22 @@ def test_transpose_chords_error2():
         _ = transpose(chords=["A", "Am", 1], semitones=1)
 
 
-def test_capo_position_error1():
+def test_capo_map_capo_position_error1():
     with pytest.raises(CapoValidationError, match=r"capo position must be a non-negative integer."):
         _ = capo_map(chords=["A", "Am", "D"], current_capo=-1, target_capo=2)
 
 
-def test_capo_position_error2():
+def test_capo_map_capo_position_error2():
     with pytest.raises(CapoValidationError, match=r"capo position must be a non-negative integer."):
         _ = capo_map(chords=["A", "Am", "D"], current_capo=0, target_capo=-2)
 
 
-def test_capo_position_error3():
+def test_capo_map_capo_position_error3():
     with pytest.raises(CapoValidationError, match=r"capo position must be a non-negative integer."):
         _ = capo_map(chords=["A", "Am", "D"], current_capo=0, target_capo=1.2)
 
 
-def test_capo_position_error4():
+def test_capo_map_capo_position_error4():
     with pytest.raises(CapoValidationError, match=r"capo position must be a non-negative integer."):
         _ = capo_map(chords=["A", "Am", "D"], current_capo=1.2, target_capo=4)
 

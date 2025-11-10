@@ -4,7 +4,8 @@ from typing import List, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
-from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_ERROR_MESSAGE
+from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
+from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_ERROR_MESSAGE
 
 
 def _is_int(number: Any) -> bool:

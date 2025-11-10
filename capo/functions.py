@@ -166,4 +166,4 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     _validate_capo_position(target_capo, current_capo)
 
     semitones_shift = target_capo - current_capo
-    return transpose(chords=chords, semitones=semitones_shift, flat_mode=flat_mode)
+    return transpose(chords=chords, semitones=-semitones_shift, flat_mode=flat_mode)

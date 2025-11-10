@@ -146,11 +146,11 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
 
-    semitone_shift = target_capo - current_capo
+    semitones_shift = target_capo - current_capo
     result = []
     for chord in chords:
         try:
-            result.append(_transpose_chord(chord, -semitone_shift, flat_mode))
+            result.append(_transpose_chord(chord, -semitones_shift, flat_mode))
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result

@@ -5,7 +5,7 @@ from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
-from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_ERROR_MESSAGE
+from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
 
 
 def _is_int(number: Any) -> bool:
@@ -56,7 +56,7 @@ def _validate_semitones(semitones: Any) -> bool:
     :param semitones: semitones
     """
     if not _is_int(semitones):
-        raise CapoValidationError(SEMITONES_ERROR_MESSAGE)
+        raise CapoValidationError(SEMITONES_TYPE_ERROR_MESSAGE)
     return True
 
 

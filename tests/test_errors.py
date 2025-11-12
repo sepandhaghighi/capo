@@ -44,9 +44,19 @@ def test_capo_map_capo_position_error4():
         _ = capo_map(chords=["A", "Am", "D"], current_capo=1.2, target_capo=4)
 
 
-def test_transpose_semitones_error():
+def test_capo_map_capo_position_error5():
+    with pytest.raises(CapoValidationError, match=r"capo position must be a non-negative integer."):
+        _ = capo_map(chords=["A", "Am", "D"], current_capo="a", target_capo=4)
+
+
+def test_transpose_semitones_error1():
     with pytest.raises(CapoValidationError, match=r"`semitones` must be an integer."):
         _ = transpose(chords=["A", "Am", "D"], semitones=1.3)
+
+
+def test_transpose_semitones_error2():
+    with pytest.raises(CapoValidationError, match=r"`semitones` must be an integer."):
+        _ = transpose(chords=["A", "Am", "D"], semitones="b")
 
 
 def test_capo_map_chord_format_error():

@@ -1,4 +1,3 @@
-import pytest
 from capo import capo_map, transpose
 
 TEST_CASE_NAME = "Functions tests"

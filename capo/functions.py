@@ -4,7 +4,8 @@ from typing import List, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
-from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE, CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_ERROR_MESSAGE
+from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
+from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_ERROR_MESSAGE
 
 
 def _is_int(number: Any) -> bool:
@@ -133,28 +134,6 @@ def _transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str
         suffix=suffix)
 
 
-def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False) -> List[str]:
-    """
-    Map a list of chords from current capo to target capo position.
-
-    :param chords: chords list
-    :param target_capo: target capo position
-    :param current_capo: current capo position
-    :param flat_mode: flat mode flag
-    """
-    _validate_chords(chords)
-    _validate_capo_position(target_capo, current_capo)
-
-    semitone_shift = target_capo - current_capo
-    result = []
-    for chord in chords:
-        try:
-            result.append(_transpose_chord(chord, -semitone_shift, flat_mode))
-        except Exception:
-            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
-    return result
-
-
 def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
     """
     Transpose chords by semitones.
@@ -172,3 +151,19 @@ def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> Lis
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result
+
+
+def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False) -> List[str]:
+    """
+    Map a list of chords from current capo to target capo position.
+
+    :param chords: chords list
+    :param target_capo: target capo position
+    :param current_capo: current capo position
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    _validate_capo_position(target_capo, current_capo)
+
+    semitones = target_capo - current_capo
+    return transpose(chords=chords, semitones=-semitones, flat_mode=flat_mode)

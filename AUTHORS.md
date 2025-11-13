@@ -5,4 +5,7 @@
 
 # Other Contributors
 ----------
+- [Gemini](https://gemini.google.com) ++
+
+++ Graphic designer
 

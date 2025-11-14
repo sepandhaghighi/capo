@@ -1,4 +1,5 @@
 <div align="center">
+<img src="https://github.com/sepandhaghighi/capo/raw/main/otherfiles/logo.png" width="320">
 <h1>Capo: A Python Library for Guitar Chord Transposition</h1>
 <br/>
 <a href="https://codecov.io/gh/sepandhaghighi/capo"><img src="https://codecov.io/gh/sepandhaghighi/capo/graph/badge.svg?token=usSRXlFCQe"></a>

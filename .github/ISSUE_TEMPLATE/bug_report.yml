@@ -85,6 +85,7 @@ body:
       label: Capo version
       description: Which version of Capo are you using?
       options:
+        - Capo 0.2
         - Capo 0.1
       default: 0
     validations:

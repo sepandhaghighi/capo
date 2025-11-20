@@ -5,8 +5,8 @@ CAPO_VERSION = "0.2"
 NOTES_SHARP = ["C", "C#", "D", "D#", "E", "F",
                "F#", "G", "G#", "A", "A#", "B"]
 
-NOTES_FLAT = ["C", "Db", "D", "Eb", "E", "F",
-              "Gb", "G", "Ab", "A", "Bb", "B"]
+NOTES_FLAT = ["C", "Db", "D", "Eb", "Fb", "F",
+              "Gb", "G", "Ab", "A", "Bb", "Cb"]
 
 ENHARMONIC_EQUIVALENTS = {
     "Db": "C#",

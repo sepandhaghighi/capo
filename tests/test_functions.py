@@ -36,20 +36,20 @@ def test_capo_map_sharp_chords6():
 
 
 def test_capo_map_flat_chords1():  # Reference: https://bjmorrissey.github.io/capo_calculator/
-    result = capo_map(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], current_capo=0, target_capo=2)
-    assert result == ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A']
+    result = capo_map(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B", "Cb", "Fb"], current_capo=0, target_capo=2)
+    assert result == ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A', 'D']
 
 
 def test_capo_map_flat_chords2():  # Reference: https://bjmorrissey.github.io/capo_calculator/
-    result = capo_map(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], current_capo=0, target_capo=4)
-    assert result == ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G']
+    result = capo_map(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B", "Cb", "Fb"], current_capo=0, target_capo=4)
+    assert result == ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G', 'C']
 
 
 def test_capo_map_flat_chords3():
     # Reference1: https://bjmorrissey.github.io/capo_calculator/
     # Reference2: https://www.musictheoryacademy.com/understanding-music/enharmonic-equivalents/
-    result = capo_map(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], current_capo=0, target_capo=4, flat_mode=True)
-    assert result == ['Ab', 'A', 'Bb', 'Cb', 'C', 'Db', 'D', 'Eb', 'Fb', 'F', 'Gb', 'G']
+    result = capo_map(chords=["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B", "Cb", "Fb"], current_capo=0, target_capo=4, flat_mode=True)
+    assert result == ['Ab', 'A', 'Bb', 'Cb', 'C', 'Db', 'D', 'Eb', 'Fb', 'F', 'Gb', 'G', 'G', 'C']
 
 
 def test_capo_map_slash_chords1():  # Reference: https://muted.io/chord-transposer/

@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `Fb` bug fixed
 - `Cb` bug fixed
+- `E#` bug fixed
+- `B#` bug fixed
 ## [0.2] - 2025-11-15
 ### Added
 - `transpose` function

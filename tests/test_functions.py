@@ -24,15 +24,15 @@ def test_capo_map_sharp_chords4():  # Reference: https://www.guitarplayerbox.com
 
 
 def test_capo_map_sharp_chords5():  # Reference: https://www.guitarplayerbox.com/chord/list/capo/calculator/
-    result = capo_map(chords=['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'], current_capo=3, target_capo=6)
-    assert result == ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G']
+    result = capo_map(chords=['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'E#', 'B#'], current_capo=3, target_capo=6)
+    assert result == ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'D', 'A']
 
 
 def test_capo_map_sharp_chords6():
     # Reference1: https://www.guitarplayerbox.com/chord/list/capo/calculator/
     # Reference2: https://www.musictheoryacademy.com/understanding-music/enharmonic-equivalents/
-    result = capo_map(chords=['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'], current_capo=3, target_capo=6, flat_mode=True)
-    assert result == ['Ab', 'A', 'Bb', 'Cb', 'C', 'Db', 'D', 'Eb', 'Fb', 'F', 'Gb', 'G']
+    result = capo_map(chords=['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'E#', 'B#'], current_capo=3, target_capo=6, flat_mode=True)
+    assert result == ['Ab', 'A', 'Bb', 'Cb', 'C', 'Db', 'D', 'Eb', 'Fb', 'F', 'Gb', 'G', 'D', 'A']
 
 
 def test_capo_map_flat_chords1():  # Reference: https://bjmorrissey.github.io/capo_calculator/
@@ -73,18 +73,18 @@ def test_capo_map_complex_chords2():  # Reference: https://muted.io/chord-transp
 
 
 def test_transpose_sharp_chords1():  # Reference: https://muted.io/chord-transposer/
-    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], semitones=0)
-    assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "E#", "B#"], semitones=0)
+    assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "F", "C"]
 
 
 def test_transpose_sharp_chords2(): # Reference: https://muted.io/chord-transposer/
-    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], semitones=-1)
-    assert result == ['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#']
+    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "E#", "B#"], semitones=-1)
+    assert result == ['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'E', 'B']
 
 
 def test_transpose_sharp_chords3():  # Reference: https://muted.io/chord-transposer/
-    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], semitones=2)
-    assert result == ["D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#"]
+    result = transpose(chords=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "E#", "B#"], semitones=2)
+    assert result == ["D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "G", "D"]
 
 
 def test_transpose_flat_chords1():  # Reference: https://muted.io/chord-transposer/

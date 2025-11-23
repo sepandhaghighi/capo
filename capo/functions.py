@@ -80,7 +80,10 @@ def _extract_parts(chord: str) -> tuple:
     else:
         main, bass = chord, None
 
-    if len(main) > 1 and main[1] in ['#', 'b']:
+    if len(main) > 2 and main[1:3] in ['##', 'bb']:
+        root = main[:3]
+        suffix = main[3:]
+    elif len(main) > 1 and main[1] in ['#', 'b']:
         root = main[:2]
         suffix = main[2:]
     else:
@@ -89,7 +92,9 @@ def _extract_parts(chord: str) -> tuple:
 
     root = _normalize_note(root)
     if bass:
-        if len(bass) > 1 and bass[1] in ['#', 'b']:
+        if len(bass) > 2 and bass[1:3] in ['##', 'bb']:
+            bass_root = _normalize_note(bass[:3])
+        elif len(bass) > 1 and bass[1] in ['#', 'b']:
             bass_root = _normalize_note(bass[:2])
         else:
             bass_root = _normalize_note(bass[:1])

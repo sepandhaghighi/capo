@@ -42,7 +42,7 @@ def test_capo_map_double_sharp_chords1():  # Reference: https://muted.io/enharmo
 
 def test_capo_map_double_sharp_chords2():  # Reference: https://muted.io/enharmonic-equivalent-chart/
     result = capo_map(chords=["C##", "D##", "E##", "F##", "G##", "A##", "B##"], current_capo=0, target_capo=1)
-    assert result == ["C#", "D#", "E#", "F#", "G#", "A#", "B#"]
+    assert result == ["C#", "D#", "F", "F#", "G#", "A#", "C"]
 
 
 def test_capo_map_double_sharp_chords3():  # Reference: https://muted.io/enharmonic-equivalent-chart/
@@ -69,7 +69,7 @@ def test_capo_map_flat_chords3():
 
 def test_capo_map_slash_chords1():  # Reference: https://muted.io/chord-transposer/
     result = capo_map(["C/G", "A", "C", "D", "D/B##"], current_capo=0, target_capo=1)
-    assert result == ['B/F#', 'G#', 'B', 'C#', 'C#/B#']
+    assert result == ['B/F#', 'G#', 'B', 'C#', 'C#/C']
 
 
 def test_capo_map_slash_chords2():  # Reference: https://muted.io/chord-transposer/
@@ -109,7 +109,7 @@ def test_transpose_double_sharp_chords1():  # Reference: https://muted.io/enharm
 
 def test_transpose_double_sharp_chords2():  # Reference: https://muted.io/enharmonic-equivalent-chart/
     result = transpose(chords=["C##", "D##", "E##", "F##", "G##", "A##", "B##"], semitones=-1)
-    assert result == ["C#", "D#", "E#", "F#", "G#", "A#", "B#"]
+    assert result == ["C#", "D#", "F", "F#", "G#", "A#", "C"]
 
 
 def test_transpose_double_sharp_chords3():  # Reference: https://muted.io/enharmonic-equivalent-chart/

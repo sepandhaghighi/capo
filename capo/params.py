@@ -18,6 +18,13 @@ ENHARMONIC_EQUIVALENTS = {
     "Fb": "E",
     "E#": "F",
     "B#": "C",
+    "B##": "C#",
+    "C##": "D",
+    "D##": "E",
+    "E##": "F#",
+    "F##": "G",
+    "G##": "A",
+    "A##": "B",
 }
 
 CHORDS_TYPE_ERROR_MESSAGE = "`chords` must be a list of strings."

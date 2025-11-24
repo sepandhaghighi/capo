@@ -5,11 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Double sharp notes
 ### Changed
 - `Fb` bug fixed
 - `Cb` bug fixed
 - `E#` bug fixed
 - `B#` bug fixed
+- `README.md` updated
+- Test system modified
 ## [0.2] - 2025-11-15
 ### Added
 - `transpose` function

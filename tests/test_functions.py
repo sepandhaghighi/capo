@@ -69,7 +69,7 @@ def test_capo_map_flat_chords3():
 
 def test_capo_map_double_flat_chords1():  # Reference: https://muted.io/enharmonic-equivalent-chart/
     result = capo_map(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], current_capo=2, target_capo=0)
-    assert result == ['A', 'D', 'E', 'F', 'G', 'A', 'B']
+    assert result == ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 
 
 def test_capo_map_double_flat_chords2():  # Reference: https://muted.io/enharmonic-equivalent-chart/
@@ -146,12 +146,12 @@ def test_transpose_flat_chords3():
 
 def test_transpose_double_flat_chords1():  # Reference: https://muted.io/enharmonic-equivalent-chart/
     result = transpose(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], semitones=2)
-    assert result == ['A', 'D', 'E', 'F', 'G', 'A', 'B']
+    assert result == ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 
 
 def test_transpose_double_flat_chords2():  # Reference: https://muted.io/enharmonic-equivalent-chart/
     result = transpose(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], semitones=1, flat_mode=True)
-    assert result == ['Ab', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb']
+    assert result == ['Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb']
 
 
 def test_transpose_slash_chords1():  # Reference: https://muted.io/chord-transposer/

@@ -67,9 +67,19 @@ def test_capo_map_flat_chords3():
     assert result == ['Ab', 'A', 'Bb', 'Cb', 'C', 'Db', 'D', 'Eb', 'Fb', 'F', 'Gb', 'G', 'G', 'C']
 
 
+def test_capo_map_double_flat_chords1():  # Reference: https://muted.io/enharmonic-equivalent-chart/
+    result = capo_map(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], current_capo=2, target_capo=0)
+    assert result == ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+
+
+def test_capo_map_double_flat_chords2():  # Reference: https://muted.io/enharmonic-equivalent-chart/
+    result = capo_map(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], current_capo=1, target_capo=0, flat_mode=True)
+    assert result == ['Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb']
+
+
 def test_capo_map_slash_chords1():  # Reference: https://muted.io/chord-transposer/
-    result = capo_map(["C/G", "A", "C", "D", "D/B##"], current_capo=0, target_capo=1)
-    assert result == ['B/F#', 'G#', 'B', 'C#', 'C#/C']
+    result = capo_map(["C/G", "A", "C", "D", "D/B##", "D/Bbb"], current_capo=0, target_capo=1)
+    assert result == ['B/F#', 'G#', 'B', 'C#', 'C#/C', 'C#/G#']
 
 
 def test_capo_map_slash_chords2():  # Reference: https://muted.io/chord-transposer/
@@ -134,9 +144,19 @@ def test_transpose_flat_chords3():
     assert result == ['Ab', 'A', 'Bb', 'Cb', 'C', 'Db', 'D', 'Eb', 'Fb', 'F', 'Gb', 'G', 'G', 'C']
 
 
+def test_transpose_double_flat_chords1():  # Reference: https://muted.io/enharmonic-equivalent-chart/
+    result = transpose(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], semitones=2)
+    assert result == ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+
+
+def test_transpose_double_flat_chords2():  # Reference: https://muted.io/enharmonic-equivalent-chart/
+    result = transpose(chords=["Cbb", "Dbb", "Ebb", "Fbb", "Gbb", "Abb", "Bbb"], semitones=1, flat_mode=True)
+    assert result == ['Cb', 'Db', 'Eb', 'Fb', 'Gb', 'Ab', 'Bb']
+
+
 def test_transpose_slash_chords1():  # Reference: https://muted.io/chord-transposer/
-    result = transpose(["C/G", "A", "C", "D", "D/A##"], semitones=-1)
-    assert result == ['B/F#', 'G#', 'B', 'C#', "C#/A#"]
+    result = transpose(["C/G", "A", "C", "D", "D/A##", "D/Abb"], semitones=-1)
+    assert result == ['B/F#', 'G#', 'B', 'C#', "C#/A#", "C#/F#"]
 
 
 def test_transpose_slash_chords2():  # Reference: https://muted.io/chord-transposer/

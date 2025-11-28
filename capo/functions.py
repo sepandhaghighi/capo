@@ -55,7 +55,7 @@ def _validate_chords(chords: Any) -> bool:
 
     :param chords: chords list
     """
-    if not isinstance(chords, list):
+    if not isinstance(chords, list) or len(chords) == 0:
         raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
     if not all(isinstance(chord, str) for chord in chords):
         raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)

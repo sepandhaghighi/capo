@@ -29,10 +29,10 @@ def _cosine_similarity(vector1: list, vector2: list) -> float:
 
 def _rotate_list(input_list: list, n: int):
     """
-    Rotate list right by n.
+    Rotate a list to the right by *n* positions.
 
     :param input_list: input list
-    :param n: rotation index
+    :param n: number of positions to rotate
     """
     return input_list[-n:] + input_list[:-n]
 
@@ -205,7 +205,7 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
 
 def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     """
-    Detect key from chords.
+    Infer the most likely musical key from a list of chords.
     
     :param chords: chords list
     :param flat_mode: flat mode flag

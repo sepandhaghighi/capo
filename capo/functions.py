@@ -7,6 +7,24 @@ from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
 
+def _cosine_similarity(vector1: list, vector2: list) -> float:
+    """
+    Cosine similarity.
+
+    :param vector1: vector 1
+    :param vector2: vector 2
+    """
+    dot = 0.0
+    norm1 = 0.0
+    norm2 = 0.0
+    for a, b in zip(vector1, vector2):
+        dot += a * b
+        norm1 += a * a
+        norm2 += b * b
+    if norm1 == 0 or norm2 == 0:
+        return 0.0
+    return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
+
 
 def _is_int(number: Any) -> bool:
     """

@@ -1,4 +1,4 @@
-from capo import capo_map, transpose
+from capo import capo_map, transpose, detect_key
 
 TEST_CASE_NAME = "Functions tests"
 

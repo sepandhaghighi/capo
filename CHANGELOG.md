@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `detect_key` function
 ### Changed
+- `_validate_chords` function modified 
 - `README.md` updated
 - Test system modified
 ## [0.3] - 2025-11-26

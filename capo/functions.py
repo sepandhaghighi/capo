@@ -222,14 +222,14 @@ def detect_key(chords: List[str]) -> str:
 
     for index, note in enumerate(NOTES_SHARP):
         profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR, index)
-        score_major = cosine_similarity(pc_vector, profile_major)
+        score_major = _cosine_similarity(pc_vector, profile_major)
         if score_major > best_score:
             best_score = score_major
-            best_key = "{note}major".format(note=note)
+            best_key = "{note}".format(note=note)
 
         profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR, index)
-        score_minor = cosine_similarity(pc_vector, profile_minor)
+        score_minor = _cosine_similarity(pc_vector, profile_minor)
         if score_minor > best_score:
             best_score = score_minor
-            best_key = "{note}minor".format(note=note)
+            best_key = "{note}m".format(note=note)
     return best_key

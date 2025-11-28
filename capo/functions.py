@@ -233,4 +233,4 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
         if score_minor > best_score:
             best_score = score_minor
             best_key = "{note}m".format(note=note)
-    return _transpose_note(best_key, semitones=0, flat_mode=flat_mode)
+    return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)

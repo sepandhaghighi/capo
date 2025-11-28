@@ -1,5 +1,6 @@
 import pytest
-from capo import capo_map, transpose, CapoValidationError
+from capo import capo_map, transpose
+from capo import detect_key, CapoValidationError
 
 TEST_CASE_NAME = "Errors tests"
 
@@ -22,6 +23,16 @@ def test_transpose_chords_error1():
 def test_transpose_chords_error2():
     with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
         _ = transpose(chords=["A", "Am", 1], semitones=1)
+
+
+def test_detect_key_chords_error1():
+    with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
+        _ = detect_key(chords={"A", "Am"})
+
+
+def test_detect_key_chords_error2():
+    with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
+        _ = detect_key(chords=["A", "Am", 1])
 
 
 def test_capo_map_capo_position_error1():

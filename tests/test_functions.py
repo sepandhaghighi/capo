@@ -172,3 +172,13 @@ def test_transpose_complex_chords1():  # Reference: https://muted.io/chord-trans
 def test_transpose_complex_chords2():  # Reference: https://muted.io/chord-transposer/
     result = transpose(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], semitones=-3)
     assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']
+
+
+def test_detect_key1(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
+    result = detect_key(["Em", "Am", "G", "Bm", "Em", "C", "G", "Bm", "Em"])
+    assert result == "Em"
+
+
+def test_detect_key2(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589
+    result = detect_key(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], flat_mode=True)
+    assert result == "Ab"

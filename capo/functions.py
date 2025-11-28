@@ -22,8 +22,6 @@ def _cosine_similarity(vector1: list, vector2: list) -> float:
         dot += a * b
         norm1 += a * a
         norm2 += b * b
-    if norm1 == 0 or norm2 == 0:
-        return 0.0
     return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
 
 

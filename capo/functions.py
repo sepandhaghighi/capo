@@ -203,11 +203,12 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     return transpose(chords=chords, semitones=-semitones, flat_mode=flat_mode)
 
 
-def detect_key(chords: List[str]) -> str:
+def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     """
     Detect key from chords.
     
     :param chords: chords list
+    :param flat_mode: flat mode flag
     """
     _validate_chords(chords)
     pc_vector = [0] * 12
@@ -232,4 +233,4 @@ def detect_key(chords: List[str]) -> str:
         if score_minor > best_score:
             best_score = score_minor
             best_key = "{note}m".format(note=note)
-    return best_key
+    return _transpose_note(best_key, semitones=0, flat_mode=flat_mode)

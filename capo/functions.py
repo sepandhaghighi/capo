@@ -209,8 +209,8 @@ def detect_key(chords: List[str]) -> str:
     
     :param chords: chords list
     """
+    _validate_chords(chords)
     pc_vector = [0] * 12
-
 
     for chord in chords:
         root, _suffix, _bass_root = _extract_parts(chord)

@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `detect_key` function
+### Changed
+- `README.md` updated
+- Test system modified
 ## [0.3] - 2025-11-26
 ### Added
 - Double sharp notes

@@ -6,6 +6,33 @@ from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
+from .params import KRUMHANSL_SCHMUCKLER_MAJOR, KRUMHANSL_SCHMUCKLER_MINOR
+
+def _cosine_similarity(vector1: list, vector2: list) -> float:
+    """
+    Cosine similarity.
+
+    :param vector1: vector 1
+    :param vector2: vector 2
+    """
+    dot = 0.0
+    norm1 = 0.0
+    norm2 = 0.0
+    for a, b in zip(vector1, vector2):
+        dot += a * b
+        norm1 += a * a
+        norm2 += b * b
+    return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
+
+
+def _rotate_list(input_list: list, n: int):
+    """
+    Rotate a list to the right by *n* positions.
+
+    :param input_list: input list
+    :param n: number of positions to rotate
+    """
+    return input_list[-n:] + input_list[:-n]
 
 
 def _is_int(number: Any) -> bool:
@@ -28,7 +55,7 @@ def _validate_chords(chords: Any) -> bool:
 
     :param chords: chords list
     """
-    if not isinstance(chords, list):
+    if not isinstance(chords, list) or len(chords) == 0:
         raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
     if not all(isinstance(chord, str) for chord in chords):
         raise CapoValidationError(CHORDS_TYPE_ERROR_MESSAGE)
@@ -172,3 +199,36 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
 
     semitones = target_capo - current_capo
     return transpose(chords=chords, semitones=-semitones, flat_mode=flat_mode)
+
+
+def detect_key(chords: List[str], flat_mode: bool = False) -> str:
+    """
+    Infer the most likely musical key from a list of chords.
+    
+    :param chords: chords list
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    pc_vector = [0] * 12
+
+    for chord in chords:
+        root, _suffix, _bass_root = _extract_parts(chord)
+        pc = NOTES_SHARP.index(root)
+        pc_vector[pc] += 1
+
+    best_key = None
+    best_score = -1
+
+    for index, note in enumerate(NOTES_SHARP):
+        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR, index)
+        score_major = _cosine_similarity(pc_vector, profile_major)
+        if score_major > best_score:
+            best_score = score_major
+            best_key = "{note}".format(note=note)
+
+        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR, index)
+        score_minor = _cosine_similarity(pc_vector, profile_minor)
+        if score_minor > best_score:
+            best_score = score_minor
+            best_key = "{note}m".format(note=note)
+    return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)

@@ -82,6 +82,18 @@
 ['C', 'G', 'Ebm', 'Bb', 'Abmaj7']
 ```
 
+### Detect Key
+
+Automatically identifies the musical key from a sequence of chords using a root-based Krumhansl-Schmuckler algorithm.
+
+```pycon
+>>> from capo import detect_key
+>>> detect_key(["Em", "Am", "G", "Bm", "Em", "C", "G", "Bm", "Em"])
+'Em'
+>>> detect_key(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], flat_mode=True)
+'Ab'
+```
+
 ## Issues & Bug Reports			
 
 Just fill an issue and describe it. We'll check it ASAP!
@@ -100,6 +112,9 @@ Just fill an issue and describe it. We'll check it ASAP!
 <blockquote>4- <a href="https://muted.io/chord-transposer/">Chord Transposer: Online Tool to Transpose Chords</a></blockquote>
 
 <blockquote>5- <a href="https://muted.io/enharmonic-equivalent-chart/">Enharmonic Equivalent Chart with Enharmonic Note Names</a></blockquote>
+
+<blockquote>6- Schmuckler, M.A., 1989. Expectation in music: Investigation of melodic and harmonic processes. <i>Music Perception, 7(2)</i>, pp.109-149.</blockquote>
+
 
 
 ## Show Your Support

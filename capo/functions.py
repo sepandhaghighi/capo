@@ -6,7 +6,7 @@ from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
-from .params import KRUMHANSL_SCHMUCKLER_MAJOR, KRUMHANSL_SCHMUCKLER_MINOR
+from .params import KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
 
 def _cosine_similarity(vector1: list, vector2: list) -> float:
     """
@@ -223,13 +223,13 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     best_score = -1
 
     for index, note in enumerate(NOTES_SHARP):
-        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR, index)
+        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, index)
         score_major = _cosine_similarity(pc_vector, profile_major)
         if score_major > best_score:
             best_score = score_major
             best_key = "{note}".format(note=note)
 
-        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR, index)
+        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, index)
         score_minor = _cosine_similarity(pc_vector, profile_minor)
         if score_minor > best_score:
             best_score = score_minor

@@ -182,3 +182,15 @@ def test_detect_key1(): # Reference: https://tabs.ultimate-guitar.com/tab/radioh
 def test_detect_key2(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589
     result = detect_key(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], flat_mode=True)
     assert result == "Ab"
+
+
+def test_detect_key3(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
+    flat_chords = transpose(["Em", "Am", "G", "Bm", "Em", "C", "G", "Bm", "Em"], semitones=0, flat_mode=True)
+    result = detect_key(flat_chords)
+    assert result == "Em"
+
+
+def test_detect_key4(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589
+    flat_chords = transpose(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], semitones=0, flat_mode=True)
+    result = detect_key(flat_chords, flat_mode=True)
+    assert result == "Ab"

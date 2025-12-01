@@ -212,9 +212,12 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     pc_vector = [0] * 12
 
     for chord in chords:
-        root, _suffix, _bass_root = _extract_parts(chord)
-        pc = NOTES_SHARP.index(root)
-        pc_vector[pc] += 1
+        try:
+            root, _suffix, _bass_root = _extract_parts(chord)
+            pc = NOTES_SHARP.index(root)
+            pc_vector[pc] += 1
+        except Exception:
+            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
 
     best_key = None
     best_score = -1

@@ -78,3 +78,8 @@ def test_capo_map_chord_format_error():
 def test_transpose_chord_format_error():
     with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
         _ = transpose(chords=["A", "Am", "s"], semitones=2)
+
+
+def test_detect_key_chord_format_error():
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
+        _ = detect_key(chords=["A", "Am", "s"])

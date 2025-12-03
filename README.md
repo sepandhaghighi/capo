@@ -76,6 +76,8 @@ Automatically converts chords between different capo positions while preserving 
 
 ### Transpose
 
+Shifts chords up or down by a specified number of semitones to change the song's key.
+
 ```pycon
 >>> from capo import transpose
 >>> transpose(["A", "E", "Cm", "G", "Fmaj7"], semitones=3)

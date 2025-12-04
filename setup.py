@@ -33,7 +33,7 @@ def read_description() -> str:
 setup(
     name='capo',
     packages=['capo'],
-    version='0.3',
+    version='0.4',
     description='Capo: A Python Library for Guitar Chord Transposition',
     long_description=read_description(),
     long_description_content_type='text/markdown',
@@ -41,7 +41,7 @@ setup(
     author='Sepand Haghighi',
     author_email='me@sepand.tech',
     url='https://github.com/sepandhaghighi/capo',
-    download_url='https://github.com/sepandhaghighi/capo/tarball/v0.3',
+    download_url='https://github.com/sepandhaghighi/capo/tarball/v0.4',
     keywords="capo guitar chord music music-theory transpose",
     project_urls={
         'Source': 'https://github.com/sepandhaghighi/capo'

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """capo params."""
-CAPO_VERSION = "0.3"
+CAPO_VERSION = "0.4"
 
 NOTES_SHARP = ["C", "C#", "D", "D#", "E", "F",
                "F#", "G", "G#", "A", "A#", "B"]

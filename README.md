@@ -64,6 +64,8 @@
 
 ### Capo Map
 
+Automatically converts chords between different capo positions while preserving harmonic relationships.
+
 ```pycon
 >>> from capo import capo_map
 >>> capo_map(["A", "Em", "C", "G"], target_capo=2, current_capo=0)
@@ -73,6 +75,8 @@
 ```
 
 ### Transpose
+
+Shifts chords up or down by a specified number of semitones to change the song's key.
 
 ```pycon
 >>> from capo import transpose

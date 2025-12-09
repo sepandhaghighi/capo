@@ -84,7 +84,6 @@ def _validate_key(target_key: str, current_key: str) -> None:
     :param target_key: target key
     :param current_key: current key ("auto" means auto-detect)
     """
-
     if not isinstance(target_key, str):
         raise CapoValidationError(KEY_TYPE_ERROR_MESSAGE)
 

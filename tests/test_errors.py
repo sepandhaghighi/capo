@@ -1,5 +1,5 @@
 import pytest
-from capo import capo_map, transpose
+from capo import capo_map, transpose, transpose_to_key
 from capo import detect_key, CapoValidationError
 
 TEST_CASE_NAME = "Errors tests"
@@ -34,6 +34,36 @@ def test_detect_key_chords_error2():
     with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
         _ = detect_key(chords=["A", "Am", 1])
 
+
+def test_transpose_to_key_chords_error1():
+    with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
+        _ = transpose_to_key(chords={"A", "Am"}, target_key="B")
+
+
+def test_transpose_to_key_chords_error2():
+    with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
+        _ = transpose_to_key(chords=["A", "Am", 1], target_key="B")
+
+
+def test_transpose_to_key_key_error1():
+    with pytest.raises(CapoValidationError, match=r"key must be a string."):
+        _ = transpose_to_key(chords=["A", "Am"], target_key=1, current_key="A")
+
+
+def test_transpose_to_key_key_error2():
+    with pytest.raises(CapoValidationError, match=r"key must be a string."):
+        _ = transpose_to_key(chords=["A", "Am"], target_key="B", current_key=1)
+
+
+def test_transpose_to_key_key_error3():
+    with pytest.raises(CapoValidationError, match=r"invalid key format or unknown note: `s`"):
+        _ = transpose_to_key(chords=["A", "Am"], target_key="s", current_key="B")
+
+
+def test_transpose_to_key_key_error4():
+    with pytest.raises(CapoValidationError, match=r"invalid key format or unknown note: `s`"):
+        _ = transpose_to_key(chords=["A", "Am"], target_key="B", current_key="s")
+        
 
 def test_capo_map_capo_position_error1():
     with pytest.raises(CapoValidationError, match=r"capo position must be a non-negative integer."):

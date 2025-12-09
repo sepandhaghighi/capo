@@ -235,3 +235,29 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
             best_score = score_minor
             best_key = "{note}m".format(note=note)
     return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
+
+
+def transpose_to_key(chords: List[str], target_key: str, current_key: Optional[str] = None, flat_mode: bool = False) -> List[str]:
+    """
+    Transpose a list of chords from one musical key to another.
+
+    :param chords: chords list
+    :param target_key: target key
+    :param current_key: current key, None or "auto" means detect automatically
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    _validate_key(target_key, current_key)
+
+    if current_key is None or current_key == "auto":
+        current_key = detect_key(chords)
+
+    to_root, _, _ = _extract_parts(target_key)
+    from_root, _, _ = _extract_parts(current_key)
+
+    to_pc = NOTES_SHARP.index(to_root)
+    from_pc = NOTES_SHARP.index(from_root)
+
+    semitones = to_pc - from_pc
+
+    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)

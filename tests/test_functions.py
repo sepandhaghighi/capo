@@ -194,3 +194,23 @@ def test_detect_key4(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-she
     flat_chords = transpose(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], semitones=0, flat_mode=True)
     result = detect_key(flat_chords, flat_mode=True)
     assert result == "Ab"
+
+
+def test_transpose_to_key1(): # Reference: https://muted.io/chord-transposer/
+    result = transpose_to_key(["Am", "F", "C", "G"], current_key="A", target_key="C")
+    assert result == ["Cm", "G#", "D#", "A#"]
+
+
+def test_transpose_to_key2(): # Reference: https://muted.io/chord-transposer/
+    result = transpose_to_key(["Am", "F", "C", "G"], target_key="C")
+    assert result == ["Em", "C", "G", "D"]
+
+
+def test_transpose_to_key3(): # Reference: https://muted.io/chord-transposer/
+    result = transpose_to_key(["Am", "F", "C", "G"], current_key="Db", target_key="Gb")
+    assert result == ["Dm", "A#", "F", "C"]
+
+
+def test_transpose_to_key4(): # Reference: https://muted.io/chord-transposer/
+    result = transpose_to_key(["Am", "F", "C", "G"], current_key="Db", target_key="Gb", flat_mode=True)
+    assert result == ["Dm", "Bb", "F", "C"]

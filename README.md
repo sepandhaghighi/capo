@@ -98,6 +98,24 @@ Automatically identifies the musical key from a sequence of chords using a root-
 'Ab'
 ```
 
+### Transpose to Key
+
+Automatically transposes a list of chords from their current key to a target key.  
+If the current key is not provided, it will be detected automatically.
+
+⚠️ Chords are shifted chromatically; chord qualities are not adjusted to the target key's scale.
+
+```pycon
+>>> from capo import transpose_to_key
+>>> transpose_to_key(["Am", "F", "C", "G"], target_key="C")
+['Em', 'C', 'G', 'D']
+>>> transpose_to_key(["Am", "F", "C", "G"], current_key="A", target_key="C")
+['Cm', 'G#', 'D#', 'A#']
+>>> transpose_to_key(["Am", "F", "C", "G"], current_key="A", target_key="C", flat_mode=True)
+['Cm', 'Ab', 'Eb', 'Bb']
+```
+
+
 ## Issues & Bug Reports			
 
 Just fill an issue and describe it. We'll check it ASAP!

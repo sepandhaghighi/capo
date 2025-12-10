@@ -6,6 +6,7 @@ from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
+from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
 from .params import KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
 
 def _cosine_similarity(vector1: list, vector2: list) -> float:
@@ -73,6 +74,32 @@ def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
         raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
     if current_capo < 0 or target_capo < 0:
         raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
+    return True
+
+
+def _validate_key(target_key: str, current_key: str) -> None:
+    """
+    Validate musical keys for transposition.
+
+    :param target_key: target key
+    :param current_key: current key ("auto" means auto-detect)
+    """
+    if not isinstance(target_key, str):
+        raise CapoValidationError(KEY_TYPE_ERROR_MESSAGE)
+
+    if not isinstance(current_key, str):
+        raise CapoValidationError(KEY_TYPE_ERROR_MESSAGE)
+
+    root, _, _ = _extract_parts(target_key)
+    if root not in NOTES_SHARP:
+        raise CapoValidationError(KEY_FORMAT_ERROR_MESSAGE.format(key=target_key))
+
+    if current_key.strip().lower() == "auto":
+        return True
+    
+    root, _, _ = _extract_parts(current_key)
+    if root not in NOTES_SHARP:
+        raise CapoValidationError(KEY_FORMAT_ERROR_MESSAGE.format(key=current_key))
     return True
 
 
@@ -235,3 +262,29 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
             best_score = score_minor
             best_key = "{note}m".format(note=note)
     return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
+
+
+def transpose_to_key(chords: List[str], target_key: str, current_key: str = "auto", flat_mode: bool = False) -> List[str]:
+    """
+    Transpose a list of chords from one musical key to another.
+
+    :param chords: chords list
+    :param target_key: target key
+    :param current_key: current key, "auto" means detect automatically
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    _validate_key(target_key, current_key)
+
+    if current_key.strip().lower() == "auto":
+        current_key = detect_key(chords)
+
+    to_root, _, _ = _extract_parts(target_key)
+    from_root, _, _ = _extract_parts(current_key)
+
+    to_pc = NOTES_SHARP.index(to_root)
+    from_pc = NOTES_SHARP.index(from_root)
+
+    semitones = to_pc - from_pc
+
+    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)

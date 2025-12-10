@@ -100,6 +100,7 @@ def _validate_key(target_key: str, current_key: str) -> None:
     root, _, _ = _extract_parts(current_key)
     if root not in NOTES_SHARP:
         raise CapoValidationError(KEY_FORMAT_ERROR_MESSAGE.format(key=current_key))
+    return True
 
 
 def _validate_semitones(semitones: Any) -> bool:

@@ -26,7 +26,7 @@ def _cosine_similarity(vector1: list, vector2: list) -> float:
     return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
 
 
-def _rotate_list(input_list: list, n: int):
+def _rotate_list(input_list: list, n: int) -> list:
     """
     Rotate a list to the right by *n* positions.
 

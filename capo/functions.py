@@ -279,12 +279,12 @@ def transpose_to_key(chords: List[str], target_key: str, current_key: str = "aut
     if current_key.strip().lower() == "auto":
         current_key = detect_key(chords)
 
-    to_root, _, _ = _extract_parts(target_key)
-    from_root, _, _ = _extract_parts(current_key)
+    target_root, _, _ = _extract_parts(target_key)
+    current_root, _, _ = _extract_parts(current_key)
 
-    to_pc = NOTES_SHARP.index(to_root)
-    from_pc = NOTES_SHARP.index(from_root)
+    target_pc = NOTES_SHARP.index(target_root)
+    current_pc = NOTES_SHARP.index(current_root)
 
-    semitones = to_pc - from_pc
+    semitones = target_pc - current_pc
 
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)

@@ -77,7 +77,7 @@ def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
     return True
 
 
-def _validate_key(target_key: str, current_key: str) -> None:
+def _validate_key(target_key: str, current_key: str) -> bool:
     """
     Validate musical keys for transposition.
 

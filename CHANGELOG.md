@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `transpose_to_key` function
 ### Changed
+- `capo_map` function modified
 - `README.md` updated
 - Test system modified
 ## [0.4] - 2025-12-05

@@ -26,7 +26,7 @@ def _cosine_similarity(vector1: list, vector2: list) -> float:
     return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
 
 
-def _rotate_list(input_list: list, n: int):
+def _rotate_list(input_list: list, n: int) -> list:
     """
     Rotate a list to the right by *n* positions.
 
@@ -77,7 +77,7 @@ def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
     return True
 
 
-def _validate_key(target_key: str, current_key: str) -> None:
+def _validate_key(target_key: str, current_key: str) -> bool:
     """
     Validate musical keys for transposition.
 
@@ -224,8 +224,8 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
 
-    semitones = target_capo - current_capo
-    return transpose(chords=chords, semitones=-semitones, flat_mode=flat_mode)
+    semitones = current_capo - target_capo
+    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
 
 
 def detect_key(chords: List[str], flat_mode: bool = False) -> str:
@@ -279,12 +279,12 @@ def transpose_to_key(chords: List[str], target_key: str, current_key: str = "aut
     if current_key.strip().lower() == "auto":
         current_key = detect_key(chords)
 
-    to_root, _, _ = _extract_parts(target_key)
-    from_root, _, _ = _extract_parts(current_key)
+    target_root, _, _ = _extract_parts(target_key)
+    current_root, _, _ = _extract_parts(current_key)
 
-    to_pc = NOTES_SHARP.index(to_root)
-    from_pc = NOTES_SHARP.index(from_root)
+    target_pc = NOTES_SHARP.index(target_root)
+    current_pc = NOTES_SHARP.index(current_root)
 
-    semitones = to_pc - from_pc
+    semitones = target_pc - current_pc
 
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)

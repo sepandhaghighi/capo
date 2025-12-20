@@ -9,6 +9,7 @@ from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
 from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
 from .params import KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
 
+
 def _cosine_similarity(vector1: list, vector2: list) -> float:
     """
     Cosine similarity.
@@ -96,7 +97,7 @@ def _validate_key(target_key: str, current_key: str) -> bool:
 
     if current_key.strip().lower() == "auto":
         return True
-    
+
     root, _, _ = _extract_parts(current_key)
     if root not in NOTES_SHARP:
         raise CapoValidationError(KEY_FORMAT_ERROR_MESSAGE.format(key=current_key))
@@ -231,7 +232,7 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
 def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     """
     Infer the most likely musical key from a list of chords.
-    
+
     :param chords: chords list
     :param flat_mode: flat mode flag
     """
@@ -264,7 +265,11 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
 
 
-def transpose_to_key(chords: List[str], target_key: str, current_key: str = "auto", flat_mode: bool = False) -> List[str]:
+def transpose_to_key(
+        chords: List[str],
+        target_key: str,
+        current_key: str = "auto",
+        flat_mode: bool = False) -> List[str]:
     """
     Transpose a list of chords from one musical key to another.
 

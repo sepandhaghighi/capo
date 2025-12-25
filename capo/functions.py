@@ -241,9 +241,12 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
 
     for chord in chords:
         try:
-            root, _suffix, _bass_root = _extract_parts(chord)
-            pc = NOTES_SHARP.index(root)
-            pc_vector[pc] += 1
+            root, suffix, _bass_root = _extract_parts(chord)
+            root_pc = NOTES_SHARP.index(root)
+            intervals = CHORD_QUALITIES.get(suffix, [0])
+            for interval in intervals:
+                pc = (root_pc + interval) % 12
+                pc_vector[pc] += 1
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
 

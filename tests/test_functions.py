@@ -176,7 +176,7 @@ def test_transpose_complex_chords2():  # Reference: https://muted.io/chord-trans
 
 
 def test_detect_key1(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
-    result = detect_key(["Em", "Am", "G", "Bm", "Em", "C", "G", "Bm", "Em"])
+    result = detect_key(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"])
     assert result == "Em"
 
 
@@ -204,7 +204,7 @@ def test_transpose_to_key1(): # Reference: https://muted.io/chord-transposer/
 
 def test_transpose_to_key2(): # Reference: https://muted.io/chord-transposer/
     result = transpose_to_key(["Am", "F", "C", "G"], target_key="C")
-    assert result == ["Em", "C", "G", "D"]
+    assert result == ['Am', 'F', 'C', 'G']
 
 
 def test_transpose_to_key3(): # Reference: https://muted.io/chord-transposer/

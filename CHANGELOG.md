@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
+- `detect_key` function modified
+- Test system modified
 ## [0.5] - 2025-12-15
 ### Added
 - `transpose_to_key` function

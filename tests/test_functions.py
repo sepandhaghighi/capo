@@ -186,7 +186,7 @@ def test_detect_key2(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-she
 
 
 def test_detect_key3(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
-    flat_chords = transpose(["Em", "Am", "G", "Bm", "Em", "C", "G", "Bm", "Em"], semitones=0, flat_mode=True)
+    flat_chords = transpose(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"], semitones=0, flat_mode=True)
     result = detect_key(flat_chords)
     assert result == "Em"
 
@@ -195,6 +195,16 @@ def test_detect_key4(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-she
     flat_chords = transpose(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], semitones=0, flat_mode=True)
     result = detect_key(flat_chords, flat_mode=True)
     assert result == "Ab"
+
+
+def test_detect_key5(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/creep-chords-4169
+    result = detect_key(["G", "B", "C", "Cm"])
+    assert result == "G"
+
+
+def test_detect_key6(): # Reference: https://tabs.ultimate-guitar.com/tab/red-hot-chili-peppers/californication-chords-202765
+    result = detect_key(["Am", "F", "C", "G", "Dm", "Fmaj7", "F#m", "D", "Bm", "A", "E"])
+    assert result == "Am"
 
 
 def test_transpose_to_key1(): # Reference: https://muted.io/chord-transposer/

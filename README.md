@@ -137,6 +137,8 @@ Just fill an issue and describe it. We'll check it ASAP!
 
 <blockquote>6- Schmuckler, M.A., 1989. Expectation in music: Investigation of melodic and harmonic processes. <i>Music Perception, 7(2)</i>, pp.109-149.</blockquote>
 
+<blockquote>7- <a href="https://yourguitarbrain.com/chord-interval-chart-how-chords-are-made/">Chord Interval Chart: How Chords Are made (Notes and Interval Formulas)</a></blockquote>
+
 
 
 ## Show Your Support

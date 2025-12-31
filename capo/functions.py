@@ -3,7 +3,7 @@
 from typing import List, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
-from .params import ENHARMONIC_EQUIVALENTS
+from .params import ENHARMONIC_EQUIVALENTS, CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
 from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
@@ -241,9 +241,12 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
 
     for chord in chords:
         try:
-            root, _suffix, _bass_root = _extract_parts(chord)
-            pc = NOTES_SHARP.index(root)
-            pc_vector[pc] += 1
+            root, suffix, _bass_root = _extract_parts(chord)
+            root_pc = NOTES_SHARP.index(root)
+            intervals = CHORD_QUALITIES.get(suffix, [0])
+            for interval in intervals:
+                pc = (root_pc + interval) % 12
+                pc_vector[pc] += 1
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
 

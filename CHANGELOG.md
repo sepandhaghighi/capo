@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `key_scores` function
 ### Changed
 - `detect_key` function modified
 - `README.md` updated

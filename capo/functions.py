@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
-from typing import List, Any
+from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS, CHORD_QUALITIES
@@ -227,6 +227,41 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
 
     semitones = current_capo - target_capo
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
+
+
+def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
+    """
+    Return scores for all possible keys based on a list of chords.
+
+    :param chords: chords list
+    :param flat_mode: flat mode flag
+    """
+    _validate_chords(chords)
+    pc_vector = [0] * 12
+
+    for chord in chords:
+        try:
+            root, suffix, _bass = _extract_parts(chord)
+            root_pc = NOTES_SHARP.index(root)
+            for interval in CHORD_QUALITIES.get(suffix, [0]):
+                pc_vector[(root_pc + interval) % 12] += 1
+        except Exception:
+            raise CapoValidationError(
+                CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord)
+            )
+
+    scores = dict()
+    for i, note in enumerate(NOTES_SHARP):
+        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, i)
+        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, i)
+
+        key_major = _transpose_chord(note, 0, flat_mode)
+        key_minor = _transpose_chord("{note}m".format(note=note), 0, flat_mode)
+
+        scores[key_major] = _cosine_similarity(pc_vector, profile_major)
+        scores[key_minor] = _cosine_similarity(pc_vector, profile_minor)
+
+    return scores
 
 
 def detect_key(chords: List[str], flat_mode: bool = False) -> str:

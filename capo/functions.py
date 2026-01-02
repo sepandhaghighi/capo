@@ -271,35 +271,8 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     :param chords: chords list
     :param flat_mode: flat mode flag
     """
-    _validate_chords(chords)
-    pc_vector = [0] * 12
-
-    for chord in chords:
-        try:
-            root, suffix, _bass_root = _extract_parts(chord)
-            root_pc = NOTES_SHARP.index(root)
-            intervals = CHORD_QUALITIES.get(suffix, [0])
-            for interval in intervals:
-                pc = (root_pc + interval) % 12
-                pc_vector[pc] += 1
-        except Exception:
-            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
-
-    best_key = None
-    best_score = -1
-
-    for index, note in enumerate(NOTES_SHARP):
-        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, index)
-        score_major = _cosine_similarity(pc_vector, profile_major)
-        if score_major > best_score:
-            best_score = score_major
-            best_key = "{note}".format(note=note)
-
-        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, index)
-        score_minor = _cosine_similarity(pc_vector, profile_minor)
-        if score_minor > best_score:
-            best_score = score_minor
-            best_key = "{note}m".format(note=note)
+    scores = key_scores(chords)
+    best_key = max(scores, key=scores.get)
     return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
 
 

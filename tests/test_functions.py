@@ -1,5 +1,5 @@
 from capo import capo_map, transpose
-from capo import detect_key, transpose_to_key
+from capo import detect_key, transpose_to_key, key_scores
 
 TEST_CASE_NAME = "Functions tests"
 

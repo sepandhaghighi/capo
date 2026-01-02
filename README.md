@@ -86,9 +86,21 @@ Shifts chords up or down by a specified number of semitones to change the song's
 ['C', 'G', 'Ebm', 'Bb', 'Abmaj7']
 ```
 
+### Key Scores
+
+Returns all possible keys and their corresponding scores for a given list of chords using the Krumhansl-Schmuckler algorithm.
+
+```pycon
+>>> from capo import key_scores
+>>> key_scores(["Em", "Am", "G", "Bm", "Em", "C", "G", "Bm", "Em"])
+{'C': 0.32, 'Cm': 0.11, 'C#': 0.05, 'C#m': 0.08, ..., 'Em': 0.98, 'Fm': 0.12, ...}
+>>> key_scores(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], flat_mode=True)
+{'Ab': 0.95, 'Abm': 0.14, 'A': 0.05, 'Am': 0.08, ...}
+```
+
 ### Detect Key
 
-Automatically identifies the musical key from a sequence of chords using a root-based Krumhansl-Schmuckler algorithm.
+Automatically identifies the musical key from a sequence of chords using the Krumhansl-Schmuckler algorithm.
 
 ```pycon
 >>> from capo import detect_key

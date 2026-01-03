@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
-from typing import List, Any
+from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS, CHORD_QUALITIES
@@ -229,9 +229,9 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
 
 
-def detect_key(chords: List[str], flat_mode: bool = False) -> str:
+def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
     """
-    Infer the most likely musical key from a list of chords.
+    Return scores for all possible keys based on a list of chords.
 
     :param chords: chords list
     :param flat_mode: flat mode flag
@@ -241,30 +241,38 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
 
     for chord in chords:
         try:
-            root, suffix, _bass_root = _extract_parts(chord)
+            root, suffix, _bass = _extract_parts(chord)
             root_pc = NOTES_SHARP.index(root)
-            intervals = CHORD_QUALITIES.get(suffix, [0])
-            for interval in intervals:
-                pc = (root_pc + interval) % 12
-                pc_vector[pc] += 1
+            for interval in CHORD_QUALITIES.get(suffix, [0]):
+                pc_vector[(root_pc + interval) % 12] += 1
         except Exception:
-            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+            raise CapoValidationError(
+                CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord)
+            )
 
-    best_key = None
-    best_score = -1
+    scores = dict()
+    for i, note in enumerate(NOTES_SHARP):
+        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, i)
+        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, i)
 
-    for index, note in enumerate(NOTES_SHARP):
-        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, index)
-        score_major = _cosine_similarity(pc_vector, profile_major)
-        if score_major > best_score:
-            best_score = score_major
-            best_key = "{note}".format(note=note)
+        key_major = _transpose_chord(note, 0, flat_mode)
+        key_minor = _transpose_chord("{note}m".format(note=note), 0, flat_mode)
 
-        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, index)
-        score_minor = _cosine_similarity(pc_vector, profile_minor)
-        if score_minor > best_score:
-            best_score = score_minor
-            best_key = "{note}m".format(note=note)
+        scores[key_major] = _cosine_similarity(pc_vector, profile_major)
+        scores[key_minor] = _cosine_similarity(pc_vector, profile_minor)
+
+    return scores
+
+
+def detect_key(chords: List[str], flat_mode: bool = False) -> str:
+    """
+    Infer the most likely musical key from a list of chords.
+
+    :param chords: chords list
+    :param flat_mode: flat mode flag
+    """
+    scores = key_scores(chords)
+    best_key = max(scores, key=scores.get)
     return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
 
 

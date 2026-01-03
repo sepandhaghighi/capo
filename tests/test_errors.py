@@ -1,6 +1,7 @@
 import pytest
 from capo import capo_map, transpose, transpose_to_key
-from capo import detect_key, CapoValidationError
+from capo import detect_key, key_scores
+from capo import CapoValidationError
 
 TEST_CASE_NAME = "Errors tests"
 
@@ -33,6 +34,16 @@ def test_detect_key_chords_error1():
 def test_detect_key_chords_error2():
     with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
         _ = detect_key(chords=["A", "Am", 1])
+
+
+def test_key_scores_chords_error1():
+    with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
+        _ = key_scores(chords={"A", "Am"})
+
+
+def test_key_scores_chords_error2():
+    with pytest.raises(CapoValidationError, match=r"`chords` must be a list of strings."):
+        _ = key_scores(chords=["A", "Am", 1])
 
 
 def test_transpose_to_key_chords_error1():
@@ -113,3 +124,8 @@ def test_transpose_chord_format_error():
 def test_detect_key_chord_format_error():
     with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
         _ = detect_key(chords=["A", "Am", "s"])
+
+
+def test_key_scores_chord_format_error():
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
+        _ = key_scores(chords=["A", "Am", "s"])

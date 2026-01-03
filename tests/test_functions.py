@@ -1,5 +1,5 @@
 from capo import capo_map, transpose
-from capo import detect_key, transpose_to_key
+from capo import detect_key, transpose_to_key, key_scores
 
 TEST_CASE_NAME = "Functions tests"
 
@@ -205,6 +205,50 @@ def test_detect_key5(): # Reference: https://tabs.ultimate-guitar.com/tab/radioh
 def test_detect_key6(): # Reference: https://tabs.ultimate-guitar.com/tab/red-hot-chili-peppers/californication-chords-202765
     result = detect_key(["Am", "F", "C", "G", "Dm", "Fmaj7", "F#m", "D", "Bm", "A", "E"])
     assert result == "Am"
+
+
+def test_key_scores1(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
+    result = key_scores(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"])
+    assert isinstance(result, dict)
+    assert all(map(lambda x: isinstance(x, float), result.values()))
+    assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "Em"
+
+
+def test_key_scores2(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589
+    result = key_scores(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], flat_mode=True)
+    assert isinstance(result, dict)
+    assert all(map(lambda x: isinstance(x, float), result.values()))
+    assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "Ab"
+
+
+def test_key_scores3(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
+    flat_chords = transpose(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"], semitones=0, flat_mode=True)
+    result = key_scores(flat_chords)
+    assert isinstance(result, dict)
+    assert all(map(lambda x: isinstance(x, float), result.values()))
+    assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "Em"
+
+
+def test_key_scores4(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589
+    flat_chords = transpose(["G#", "G#", "Fm", "C#", "D#", "G#", "Fm", "C#", "D#"], semitones=0, flat_mode=True)
+    result = key_scores(flat_chords, flat_mode=True)
+    assert isinstance(result, dict)
+    assert all(map(lambda x: isinstance(x, float), result.values()))
+    assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "Ab"
+
+
+def test_key_scores5(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/creep-chords-4169
+    result = key_scores(["G", "B", "C", "Cm"])
+    assert isinstance(result, dict)
+    assert all(map(lambda x: isinstance(x, float), result.values()))
+    assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "G"
+
+
+def test_key_scores6(): # Reference: https://tabs.ultimate-guitar.com/tab/red-hot-chili-peppers/californication-chords-202765
+    result = key_scores(["Am", "F", "C", "G", "Dm", "Fmaj7", "F#m", "D", "Bm", "A", "E"])
+    assert isinstance(result, dict)
+    assert all(map(lambda x: isinstance(x, float), result.values()))
+    assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "Am"
 
 
 def test_transpose_to_key1(): # Reference: https://muted.io/chord-transposer/

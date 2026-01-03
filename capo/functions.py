@@ -271,9 +271,9 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     :param chords: chords list
     :param flat_mode: flat mode flag
     """
-    scores = key_scores(chords)
+    scores = key_scores(chords=chords, flat_mode=flat_mode)
     best_key = max(scores, key=scores.get)
-    return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
+    return best_key
 
 
 def transpose_to_key(

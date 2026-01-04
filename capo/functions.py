@@ -255,8 +255,8 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
         profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, i)
         profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, i)
 
-        key_major = _transpose_chord(note, 0, flat_mode)
-        key_minor = _transpose_chord("{note}m".format(note=note), 0, flat_mode)
+        key_major = _transpose_chord(note, semitones=0, flat_mode=flat_mode)
+        key_minor = _transpose_chord("{note}m".format(note=note), semitones=0, flat_mode=flat_mode)
 
         scores[key_major] = _cosine_similarity(pc_vector, profile_major)
         scores[key_minor] = _cosine_similarity(pc_vector, profile_minor)
@@ -271,9 +271,9 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     :param chords: chords list
     :param flat_mode: flat mode flag
     """
-    scores = key_scores(chords)
+    scores = key_scores(chords=chords, flat_mode=flat_mode)
     best_key = max(scores, key=scores.get)
-    return _transpose_chord(best_key, semitones=0, flat_mode=flat_mode)
+    return best_key
 
 
 def transpose_to_key(

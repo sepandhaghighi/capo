@@ -51,13 +51,13 @@
 ## Installation		
 
 ### Source Code
-- Download [Version 0.5](https://github.com/sepandhaghighi/capo/archive/v0.5.zip) or [Latest Source](https://github.com/sepandhaghighi/capo/archive/dev.zip)
+- Download [Version 0.6](https://github.com/sepandhaghighi/capo/archive/v0.6.zip) or [Latest Source](https://github.com/sepandhaghighi/capo/archive/dev.zip)
 - `pip install .`				
 
 ### PyPI
 
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)     
-- `pip install capo==0.5`						
+- `pip install capo==0.6`						
 
 
 ## Usage

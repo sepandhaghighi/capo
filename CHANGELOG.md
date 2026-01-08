@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `6#11` chord quality
 - `add9` chord quality
+- `6add9` chord quality
 ### Changed
 - `README.md` updated
 ## [0.6] - 2026-01-05

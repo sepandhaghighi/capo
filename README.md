@@ -151,6 +151,8 @@ Just fill an issue and describe it. We'll check it ASAP!
 
 <blockquote>7- <a href="https://yourguitarbrain.com/chord-interval-chart-how-chords-are-made/">Chord Interval Chart: How Chords Are made (Notes and Interval Formulas)</a></blockquote>
 
+<blockquote>8- <a href="https://www.fachords.com/guitar-chord/">Guitar Chords Explained: Diagrams, Exercises, Theory, Tips & Tricks</a></blockquote>
+
 
 
 ## Show Your Support

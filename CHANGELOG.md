@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `13#5` chord quality
 - `m(maj9)` chord quality
 - `m6add9` chord quality
+- `9b5` chord quality
+- `9#11` chord quality
+- `13b9` chord quality
+- `13#11` chord quality
+- `13#9` chord quality
 ### Changed
 - `README.md` updated
 ## [0.6] - 2026-01-05

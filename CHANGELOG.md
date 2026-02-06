@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `13b9` chord quality
 - `13#11` chord quality
 - `13#9` chord quality
+- `5` chord quality
 ### Changed
 - `README.md` updated
 ## [0.6] - 2026-01-05

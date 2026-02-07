@@ -115,7 +115,8 @@ Automatically identifies the musical key from a sequence of chords using the Kru
 Automatically transposes a list of chords from their current key to a target key.  
 If the current key is not provided, it will be detected automatically.
 
-⚠️ Chords are shifted chromatically; chord qualities are not adjusted to the target key's scale.
+> [!NOTE]
+> Chords are shifted chromatically; chord qualities are not adjusted to the target key's scale.
 
 ```pycon
 >>> from capo import transpose_to_key

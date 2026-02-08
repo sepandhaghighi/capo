@@ -304,3 +304,12 @@ def transpose_to_key(
     semitones = target_pc - current_pc
 
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
+
+
+def sharp_to_flat(chords: List[str]) -> List[str]:
+    """
+    Convert chords from sharp notation to flat notation.
+
+    :param chords: chords list
+    """
+    return transpose(chords, semitones=0, flat_mode=True)

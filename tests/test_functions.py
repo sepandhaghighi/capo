@@ -269,3 +269,13 @@ def test_transpose_to_key3(): # Reference: https://muted.io/chord-transposer/
 def test_transpose_to_key4(): # Reference: https://muted.io/chord-transposer/
     result = transpose_to_key(["Am", "F", "C", "G"], current_key="Db", target_key="Gb", flat_mode=True)
     assert result == ["Dm", "Bb", "F", "C"]
+
+
+def test_sharp_to_flat1():
+    result = sharp_to_flat(["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"])
+    assert result == ["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"]
+
+
+def test_sharp_to_flat2():
+    result = sharp_to_flat(["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"])
+    assert result == ["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"]

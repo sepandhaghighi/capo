@@ -7,4 +7,11 @@ from capo.functions import detect_key, key_scores
 from capo.functions import sharp_to_flat
 __version__ = CAPO_VERSION
 
-__all__ = ["CapoValidationError", "capo_map", "transpose", "transpose_to_key", "detect_key", "key_scores", "sharp_to_flat"]
+__all__ = [
+    "CapoValidationError",
+    "capo_map",
+    "transpose",
+    "transpose_to_key",
+    "detect_key",
+    "key_scores",
+    "sharp_to_flat"]

@@ -133,9 +133,11 @@ If the current key is not provided, it will be detected automatically.
 Converts chord notation between sharp and flat representations without changing pitch.
 
 ```pycon
->>> from capo import sharp_to_flat
+>>> from capo import sharp_to_flat, flat_to_sharp
 >>> sharp_to_flat(["A#", "C#", "F#m", "G#7"])
 ['Bb', 'Db', 'F#m', 'Ab7']
+>>> flat_to_sharp(["Bb", "Db", "F#m", "Ab7"])
+['A#', 'C#', 'F#m', 'G#7']
 ```
 
 ## Issues & Bug Reports			

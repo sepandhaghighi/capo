@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `5` chord quality
 ### Changed
 - `README.md` updated
+- Test system modified
 ## [0.6] - 2026-01-05
 ### Added
 - `key_scores` function

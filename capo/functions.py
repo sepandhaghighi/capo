@@ -322,4 +322,3 @@ def flat_to_sharp(chords: List[str]) -> List[str]:
     :param chords: chords list
     """
     return transpose(chords, semitones=0, flat_mode=False)
-

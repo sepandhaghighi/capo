@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `sharp_to_flat` function
+- `flat_to_sharp` function
 - `6#11` chord quality
 - `add9` chord quality
 - `6add9` chord quality

@@ -1,6 +1,6 @@
 from capo import capo_map, transpose
 from capo import detect_key, transpose_to_key, key_scores
-from capo import sharp_to_flat
+from capo import sharp_to_flat, flat_to_sharp
 
 TEST_CASE_NAME = "Functions tests"
 
@@ -280,3 +280,14 @@ def test_sharp_to_flat1():
 def test_sharp_to_flat2():
     result = sharp_to_flat(["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"])
     assert result == ["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"]
+
+
+def test_flat_to_sharp1():
+    result = flat_to_sharp(["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"])
+    assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+
+def test_flat_to_sharp2():
+    result = flat_to_sharp(["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"])
+    assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+

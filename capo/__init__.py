@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """capo modules."""
-from capo.params import CAPO_VERSION
-from capo.errors import CapoValidationError
-from capo.functions import capo_map, transpose, transpose_to_key
-from capo.functions import detect_key, key_scores
-from capo.functions import sharp_to_flat, flat_to_sharp
+from .params import CAPO_VERSION
+from .errors import CapoValidationError
+from .functions import capo_map, transpose, transpose_to_key
+from .functions import detect_key, key_scores
+from .functions import sharp_to_flat, flat_to_sharp
 __version__ = CAPO_VERSION
 
 __all__ = [

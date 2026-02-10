@@ -11,7 +11,7 @@
 ## Overview	
 
 <p align="justify">		
-<b>Capo</b> is a lightweight Python library for guitarists and developers that provides precise chord transposition across capo positions. It allows users to easily convert chord progressions from one capo setting to another, supporting sharps, flats, complex chord types, and slash chords. Whether you’re building a songwriting assistant, a practice tool, or a music theory application, <b>Capo</b> delivers a clear, reliable foundation for working with chord mappings and capo calculations in Python.
+<b>Capo</b> is a lightweight Python library for guitarists and developers that provides precise chord transposition across capo positions. It allows users to easily convert chord progressions from one capo setting to another, supporting sharps, flats, complex chord types, and slash chords. Whether you're building a songwriting assistant, a practice tool, or a music theory application, <b>Capo</b> delivers a clear, reliable foundation for working with chord mappings and capo calculations in Python.
 </p>
 
 <table>
@@ -51,13 +51,13 @@
 ## Installation		
 
 ### Source Code
-- Download [Version 0.6](https://github.com/sepandhaghighi/capo/archive/v0.6.zip) or [Latest Source](https://github.com/sepandhaghighi/capo/archive/dev.zip)
+- Download [Version 0.7](https://github.com/sepandhaghighi/capo/archive/v0.7.zip) or [Latest Source](https://github.com/sepandhaghighi/capo/archive/dev.zip)
 - `pip install .`				
 
 ### PyPI
 
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)     
-- `pip install capo==0.6`						
+- `pip install capo==0.7`						
 
 
 ## Usage

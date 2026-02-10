@@ -136,7 +136,7 @@ Converts chord notation between sharp and flat representations without changing 
 >>> from capo import sharp_to_flat, flat_to_sharp
 >>> sharp_to_flat(["A#", "C#", "F#m", "G#7"])
 ['Bb', 'Db', 'Gbm', 'Ab7']
->>> flat_to_sharp(["Bb", "Db", "F#m", "Ab7"])
+>>> flat_to_sharp(["Bb", "Db", "Gbm", "Ab7"])
 ['A#', 'C#', 'F#m', 'G#7']
 ```
 

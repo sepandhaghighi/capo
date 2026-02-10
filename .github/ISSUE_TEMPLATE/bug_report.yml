@@ -85,6 +85,7 @@ body:
       label: Capo version
       description: Which version of Capo are you using?
       options:
+        - Capo 0.7
         - Capo 0.6
         - Capo 0.5
         - Capo 0.4

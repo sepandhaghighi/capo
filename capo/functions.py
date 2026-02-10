@@ -313,3 +313,12 @@ def sharp_to_flat(chords: List[str]) -> List[str]:
     :param chords: chords list
     """
     return transpose(chords, semitones=0, flat_mode=True)
+
+
+def flat_to_sharp(chords: List[str]) -> List[str]:
+    """
+    Convert chords from flat notation to sharp notation.
+
+    :param chords: chords list
+    """
+    return transpose(chords, semitones=0, flat_mode=False)

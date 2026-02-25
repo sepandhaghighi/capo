@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `7b5#9` chord quality
 - `7#5b9` chord quality
 - `7#5#9` chord quality
+- `m(maj11)` chord quality
+- `m(maj13)` chord quality
 ## [0.7] - 2026-02-12
 ### Added
 - `sharp_to_flat` function

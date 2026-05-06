@@ -165,6 +165,8 @@ Just fill an issue and describe it. We'll check it ASAP!
 
 <blockquote>8- <a href="https://www.fachords.com/guitar-chord/">Guitar Chords Explained: Diagrams, Exercises, Theory, Tips & Tricks</a></blockquote>
 
+<blockquote>9- <a href="https://www.all-guitar-chords.com/">Guitar Chords</a></blockquote>
+
 
 
 ## Show Your Support

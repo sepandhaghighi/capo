@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- `maj7b5` chord quality
+- `7b5b9` chord quality
+- `7b5#9` chord quality
+- `7#5b9` chord quality
+- `7#5#9` chord quality
+- `m(maj11)` chord quality
+- `m(maj13)` chord quality
+### Changed
+- `README.md` updated
 ## [0.7] - 2026-02-12
 ### Added
 - `sharp_to_flat` function

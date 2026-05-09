@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `7#5#9` chord quality
 - `m(maj11)` chord quality
 - `m(maj13)` chord quality
+- `CapoError` class
 ### Changed
 - `README.md` updated
 ## [0.7] - 2026-02-12

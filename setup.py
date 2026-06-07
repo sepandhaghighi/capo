@@ -1,17 +1,9 @@
 # -*- coding: utf-8 -*-
 """Setup module."""
-from typing import List
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-
-
-def get_requires() -> List[str]:
-    """Read requirements.txt."""
-    requirements = open("requirements.txt", "r").read()
-    return list(filter(lambda x: x != "", requirements.split()))
-
 
 def read_description() -> str:
     """Read README.md and CHANGELOG.md."""
@@ -42,11 +34,11 @@ setup(
     author_email='me@sepand.tech',
     url='https://github.com/sepandhaghighi/capo',
     download_url='https://github.com/sepandhaghighi/capo/tarball/v0.7',
-    keywords="capo guitar chord music music-theory transpose",
+    keywords='capo guitar chord music music-theory transpose',
     project_urls={
         'Source': 'https://github.com/sepandhaghighi/capo'
     },
-    install_requires=get_requires(),
+    install_requires=[],
     python_requires='>=3.7',
     classifiers=[
         'Development Status :: 4 - Beta',

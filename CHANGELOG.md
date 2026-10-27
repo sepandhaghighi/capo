@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `CapoError` class
 ### Changed
 - `README.md` updated
+- Dependencies structure modified
 ## [0.7] - 2026-02-12
 ### Added
 - `sharp_to_flat` function

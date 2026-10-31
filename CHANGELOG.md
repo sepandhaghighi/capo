@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `README.md` updated
 - Dependencies structure modified
+- `Python 3.15` added to `test.yml`
 ## [0.7] - 2026-02-12
 ### Added
 - `sharp_to_flat` function

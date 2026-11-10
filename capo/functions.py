@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .note import Note
 from .chord import Chord, _extract_parts
-from .validators import _is_int, _validate_semitones, _validate_chords
+from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position
 from .params import NOTES_SHARP
 from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
@@ -41,20 +41,6 @@ def _rotate_list(input_list: list, n: int) -> list:
     :param n: number of positions to rotate
     """
     return input_list[-n:] + input_list[:-n]
-
-
-def _validate_capo_position(target_capo: Any, current_capo: Any) -> bool:
-    """
-    Validate capo position.
-
-    :param target_capo: target capo position
-    :param current_capo: current capo position
-    """
-    if not _is_int(current_capo) or not _is_int(target_capo):
-        raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
-    if current_capo < 0 or target_capo < 0:
-        raise CapoValidationError(CAPO_POSITION_ERROR_MESSAGE)
-    return True
 
 
 def _validate_key(target_key: str, current_key: str) -> bool:

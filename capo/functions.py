@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .note import Note
 from .chord import Chord
-from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position, _validate_key, _extract_parts
+from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position, _validate_key, _extract_parts, _cosine_similarity, _rotate_list
 from .params import NOTES_SHARP
 from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
@@ -14,33 +14,6 @@ from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
 from .params import KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE
 from .params import KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
 
-
-
-def _cosine_similarity(vector1: list, vector2: list) -> float:
-    """
-    Cosine similarity.
-
-    :param vector1: vector 1
-    :param vector2: vector 2
-    """
-    dot = 0.0
-    norm1 = 0.0
-    norm2 = 0.0
-    for a, b in zip(vector1, vector2):
-        dot += a * b
-        norm1 += a * a
-        norm2 += b * b
-    return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
-
-
-def _rotate_list(input_list: list, n: int) -> list:
-    """
-    Rotate a list to the right by *n* positions.
-
-    :param input_list: input list
-    :param n: number of positions to rotate
-    """
-    return input_list[-n:] + input_list[:-n]
 
 
 def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:

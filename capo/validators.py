@@ -8,6 +8,33 @@ from .params import SEMITONES_TYPE_ERROR_MESSAGE, CHORDS_TYPE_ERROR_MESSAGE
 from .params import CAPO_POSITION_ERROR_MESSAGE, KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
 
 
+def _cosine_similarity(vector1: list, vector2: list) -> float:
+    """
+    Cosine similarity.
+
+    :param vector1: vector 1
+    :param vector2: vector 2
+    """
+    dot = 0.0
+    norm1 = 0.0
+    norm2 = 0.0
+    for a, b in zip(vector1, vector2):
+        dot += a * b
+        norm1 += a * a
+        norm2 += b * b
+    return dot / ((norm1 ** 0.5) * (norm2 ** 0.5))
+
+
+def _rotate_list(input_list: list, n: int) -> list:
+    """
+    Rotate a list to the right by *n* positions.
+
+    :param input_list: input list
+    :param n: number of positions to rotate
+    """
+    return input_list[-n:] + input_list[:-n]
+
+
 def _normalize_note(note: str) -> str:
     """
     Normalize a note to its sharp representation.

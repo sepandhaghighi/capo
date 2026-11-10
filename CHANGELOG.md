@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `Chord` class
+- `Note` class
+- `CapoError` class
 - `maj7b5` chord quality
 - `7b5b9` chord quality
 - `7b5#9` chord quality
@@ -13,7 +16,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `7#5#9` chord quality
 - `m(maj11)` chord quality
 - `m(maj13)` chord quality
-- `CapoError` class
 ### Changed
 - `README.md` updated
 - Dependencies structure modified

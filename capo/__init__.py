@@ -5,6 +5,8 @@ from .errors import CapoError, CapoValidationError
 from .functions import capo_map, transpose, transpose_to_key
 from .functions import detect_key, key_scores
 from .functions import sharp_to_flat, flat_to_sharp
+from .note import Note
+from .chord import Chord
 __version__ = CAPO_VERSION
 
 __all__ = [
@@ -16,4 +18,7 @@ __all__ = [
     "detect_key",
     "key_scores",
     "sharp_to_flat",
-    "flat_to_sharp"]
+    "flat_to_sharp",
+    "Note",
+    "Chord",
+    ]

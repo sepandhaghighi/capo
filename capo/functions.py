@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .note import Note
 from .chord import Chord, _extract_parts
-from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position
+from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position, _validate_key
 from .params import NOTES_SHARP
 from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
@@ -41,33 +41,6 @@ def _rotate_list(input_list: list, n: int) -> list:
     :param n: number of positions to rotate
     """
     return input_list[-n:] + input_list[:-n]
-
-
-def _validate_key(target_key: str, current_key: str) -> bool:
-    """
-    Validate musical keys for transposition.
-
-    :param target_key: target key
-    :param current_key: current key ("auto" means auto-detect)
-    """
-    if not isinstance(target_key, str):
-        raise CapoValidationError(KEY_TYPE_ERROR_MESSAGE)
-
-    if not isinstance(current_key, str):
-        raise CapoValidationError(KEY_TYPE_ERROR_MESSAGE)
-
-    root, _, _ = _extract_parts(target_key)
-    if root not in NOTES_SHARP:
-        raise CapoValidationError(KEY_FORMAT_ERROR_MESSAGE.format(key=target_key))
-
-    if current_key.strip().lower() == "auto":
-        return True
-
-    root, _, _ = _extract_parts(current_key)
-    if root not in NOTES_SHARP:
-        raise CapoValidationError(KEY_FORMAT_ERROR_MESSAGE.format(key=current_key))
-    return True
-
 
 
 def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:

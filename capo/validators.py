@@ -1,6 +1,5 @@
-
 # -*- coding: utf-8 -*-
-"""capo validation."""
+"""capo validators."""
 
 from typing import Any
 from .errors import CapoValidationError

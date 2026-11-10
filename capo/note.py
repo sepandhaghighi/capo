@@ -6,7 +6,7 @@ from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORD_FORMAT_ERROR_MESSAGE
-from .validation import _validate_semitones
+from .validators import _validate_semitones
 
 
 def _normalize_note(note: str) -> str:

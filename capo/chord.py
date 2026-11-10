@@ -4,7 +4,7 @@
 
 from .errors import CapoValidationError
 from .note import Note, _normalize_note
-from .validation import _validate_semitones
+from .validators import _validate_semitones
 from .params import NOTES_SHARP, CHORD_QUALITIES
 from .params import CHORD_FORMAT_ERROR_MESSAGE
 

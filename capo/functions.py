@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .note import Note
 from .chord import Chord, _extract_parts
-from .validation import _is_int, _validate_semitones
+from .validators import _is_int, _validate_semitones
 from .params import NOTES_SHARP
 from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE

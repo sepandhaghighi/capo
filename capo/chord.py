@@ -2,45 +2,10 @@
 """capo chord."""
 
 from .errors import CapoValidationError
-from .note import Note, _normalize_note
-from .validators import _validate_semitones
+from .note import Note
+from .utils import _validate_semitones, _extract_parts, _normalize_note
 from .params import NOTES_SHARP, CHORD_QUALITIES
 from .params import CHORD_FORMAT_ERROR_MESSAGE
-
-
-def _extract_parts(chord: str) -> tuple:
-    """
-    Split a chord into root, suffix, and optional bass note (for slash chords).
-
-    :param chord: input chord
-    """
-    if "/" in chord:
-        main, bass = chord.split("/", 1)
-    else:
-        main, bass = chord, None
-
-    if len(main) > 2 and main[1:3] in ['##', 'bb']:
-        root = main[:3]
-        suffix = main[3:]
-    elif len(main) > 1 and main[1] in ['#', 'b']:
-        root = main[:2]
-        suffix = main[2:]
-    else:
-        root = main[:1]
-        suffix = main[1:]
-
-    root = _normalize_note(root)
-    if bass:
-        if len(bass) > 2 and bass[1:3] in ['##', 'bb']:
-            bass_root = _normalize_note(bass[:3])
-        elif len(bass) > 1 and bass[1] in ['#', 'b']:
-            bass_root = _normalize_note(bass[:2])
-        else:
-            bass_root = _normalize_note(bass[:1])
-    else:
-        bass_root = None
-
-    return root, suffix, bass_root
 
 
 class Chord:

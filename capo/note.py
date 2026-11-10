@@ -5,7 +5,7 @@ from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORD_FORMAT_ERROR_MESSAGE
-from .validators import _validate_semitones, _normalize_note, _transpose_note
+from .utils import _validate_semitones, _normalize_note, _transpose_note
 
 
 

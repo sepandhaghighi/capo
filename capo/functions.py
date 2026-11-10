@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 """capo functions."""
+
 from typing import List, Dict, Any
 from .errors import CapoValidationError
-from .params import NOTES_SHARP, NOTES_FLAT
-from .params import ENHARMONIC_EQUIVALENTS, CHORD_QUALITIES
+from .note import Note
+from .chord import Chord, _extract_parts
+from .validation import _is_int, _validate_semitones
+from .params import NOTES_SHARP
+from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
-from .params import CHORD_FORMAT_ERROR_MESSAGE, SEMITONES_TYPE_ERROR_MESSAGE
+from .params import CHORD_FORMAT_ERROR_MESSAGE
 from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
-from .params import KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
+from .params import KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE
+from .params import KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
+
 
 
 def _cosine_similarity(vector1: list, vector2: list) -> float:
@@ -35,20 +41,6 @@ def _rotate_list(input_list: list, n: int) -> list:
     :param n: number of positions to rotate
     """
     return input_list[-n:] + input_list[:-n]
-
-
-def _is_int(number: Any) -> bool:
-    """
-    Check that input number is integer or not.
-
-    :param number: input number
-    """
-    try:
-        if int(number) == number:
-            return True
-        return False
-    except Exception:
-        return False
 
 
 def _validate_chords(chords: Any) -> bool:
@@ -104,95 +96,6 @@ def _validate_key(target_key: str, current_key: str) -> bool:
     return True
 
 
-def _validate_semitones(semitones: Any) -> bool:
-    """
-    Validate semitones.
-
-    :param semitones: semitones
-    """
-    if not _is_int(semitones):
-        raise CapoValidationError(SEMITONES_TYPE_ERROR_MESSAGE)
-    return True
-
-
-def _normalize_note(note: str) -> str:
-    """
-    Normalize a note to its sharp representation.
-
-    :param note: input note
-    """
-    return ENHARMONIC_EQUIVALENTS.get(note, note)
-
-
-def _extract_parts(chord: str) -> tuple:
-    """
-    Split a chord into root, suffix, and optional bass note (for slash chords).
-
-    :param chord: input chord
-    """
-    if "/" in chord:
-        main, bass = chord.split("/", 1)
-    else:
-        main, bass = chord, None
-
-    if len(main) > 2 and main[1:3] in ['##', 'bb']:
-        root = main[:3]
-        suffix = main[3:]
-    elif len(main) > 1 and main[1] in ['#', 'b']:
-        root = main[:2]
-        suffix = main[2:]
-    else:
-        root = main[:1]
-        suffix = main[1:]
-
-    root = _normalize_note(root)
-    if bass:
-        if len(bass) > 2 and bass[1:3] in ['##', 'bb']:
-            bass_root = _normalize_note(bass[:3])
-        elif len(bass) > 1 and bass[1] in ['#', 'b']:
-            bass_root = _normalize_note(bass[:2])
-        else:
-            bass_root = _normalize_note(bass[:1])
-    else:
-        bass_root = None
-
-    return root, suffix, bass_root
-
-
-def _transpose_note(note: str, semitones: int, flat_mode: bool = False) -> str:
-    """
-    Transpose a note by given semitones.
-
-    :param note: input note
-    :param semitones: semitones
-    :param flat_mode: flat mode flag
-    """
-    note_sharp = _normalize_note(note)
-    notes_system = NOTES_FLAT if flat_mode else NOTES_SHARP
-    old_index = NOTES_SHARP.index(note_sharp)
-    new_index = (old_index + semitones) % 12
-    return notes_system[new_index]
-
-
-def _transpose_chord(chord: str, semitones: int, flat_mode: bool = False) -> str:
-    """
-    Transpose a full chord string by semitones.
-
-    :param chord: input chord
-    :param semitones: semitones
-    :param flat_mode: flat mode flag
-    """
-    root, suffix, bass = _extract_parts(chord)
-    new_root = _transpose_note(root, semitones, flat_mode)
-    new_bass = _transpose_note(bass, semitones, flat_mode) if bass else None
-
-    return "{new_root}{suffix}/{new_bass}".format(
-        new_root=new_root,
-        suffix=suffix,
-        new_bass=new_bass) if new_bass else "{new_root}{suffix}".format(
-        new_root=new_root,
-        suffix=suffix)
-
 
 def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
     """
@@ -204,12 +107,18 @@ def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> Lis
     """
     _validate_chords(chords)
     _validate_semitones(semitones)
+
     result = []
     for chord in chords:
         try:
-            result.append(_transpose_chord(chord, semitones, flat_mode))
+            result.append(
+                str(Chord._from_string(chord).transpose(
+                    semitones, flat_mode))
+            )
         except Exception:
-            raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+            raise CapoValidationError(
+                CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
+
     return result
 
 
@@ -241,25 +150,42 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
 
     for chord in chords:
         try:
-            root, suffix, _bass = _extract_parts(chord)
-            root_pc = NOTES_SHARP.index(root)
-            for interval in CHORD_QUALITIES.get(suffix, [0]):
+            chord_obj = Chord._from_string(
+                chord, validate_bass=False)
+
+            root_pc = NOTES_SHARP.index(
+                Note(chord_obj.root).note)
+
+            for interval in CHORD_QUALITIES.get(
+                    chord_obj.suffix, [0]):
                 pc_vector[(root_pc + interval) % 12] += 1
+
         except Exception:
             raise CapoValidationError(
-                CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord)
-            )
+                CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
 
+
+    
     scores = dict()
     for i, note in enumerate(NOTES_SHARP):
-        profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, i)
-        profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, i)
+        profile_major = _rotate_list(
+            KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, i)
+        profile_minor = _rotate_list(
+            KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, i)
 
-        key_major = _transpose_chord(note, semitones=0, flat_mode=flat_mode)
-        key_minor = _transpose_chord("{note}m".format(note=note), semitones=0, flat_mode=flat_mode)
+        key_major = str(
+            Note(note).transpose(0, flat_mode))
 
-        scores[key_major] = _cosine_similarity(pc_vector, profile_major)
-        scores[key_minor] = _cosine_similarity(pc_vector, profile_minor)
+        key_minor = str(
+            Chord._from_string(
+                "{note}m".format(note=note)
+            ).transpose(0, flat_mode))
+
+        scores[key_major] = _cosine_similarity(
+            pc_vector, profile_major)
+
+        scores[key_minor] = _cosine_similarity(
+            pc_vector, profile_minor)
 
     return scores
 
@@ -289,21 +215,22 @@ def transpose_to_key(
     :param current_key: current key, "auto" means detect automatically
     :param flat_mode: flat mode flag
     """
-    _validate_chords(chords)
-    _validate_key(target_key, current_key)
-
-    if current_key.strip().lower() == "auto":
-        current_key = detect_key(chords)
-
+    
     target_root, _, _ = _extract_parts(target_key)
     current_root, _, _ = _extract_parts(current_key)
 
-    target_pc = NOTES_SHARP.index(target_root)
-    current_pc = NOTES_SHARP.index(current_root)
+    target_pc = NOTES_SHARP.index(
+        Note(target_root).note)
+
+    current_pc = NOTES_SHARP.index(
+        Note(current_root).note)
 
     semitones = target_pc - current_pc
 
-    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
+    return transpose(
+        chords=chords,
+        semitones=semitones,
+        flat_mode=flat_mode)
 
 
 def sharp_to_flat(chords: List[str]) -> List[str]:

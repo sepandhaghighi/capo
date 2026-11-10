@@ -202,6 +202,7 @@ def detect_key(chords: List[str], flat_mode: bool = False) -> str:
     return best_key
 
 
+
 def transpose_to_key(
         chords: List[str],
         target_key: str,
@@ -215,7 +216,12 @@ def transpose_to_key(
     :param current_key: current key, "auto" means detect automatically
     :param flat_mode: flat mode flag
     """
-    
+    _validate_chords(chords)
+    _validate_key(target_key, current_key)
+
+    if current_key.strip().lower() == "auto":
+        current_key = detect_key(chords)
+
     target_root, _, _ = _extract_parts(target_key)
     current_root, _, _ = _extract_parts(current_key)
 

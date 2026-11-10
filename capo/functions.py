@@ -4,8 +4,8 @@
 from typing import List, Dict, Any
 from .errors import CapoValidationError
 from .note import Note
-from .chord import Chord, _extract_parts
-from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position, _validate_key
+from .chord import Chord
+from .validators import _is_int, _validate_semitones, _validate_chords, _validate_capo_position, _validate_key, _extract_parts
 from .params import NOTES_SHARP
 from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE

@@ -2,8 +2,8 @@
 """capo chord."""
 
 from .errors import CapoValidationError
-from .note import Note, _normalize_note
-from .validators import _validate_semitones
+from .note import Note
+from .validators import _validate_semitones, _extract_parts, _normalize_note
 from .params import NOTES_SHARP, CHORD_QUALITIES
 from .params import CHORD_FORMAT_ERROR_MESSAGE
 

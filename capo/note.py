@@ -35,7 +35,9 @@ class Note:
         return self
 
     def __str__(self):
+        """Return string representation of Note."""
         return self.note
 
     def __repr__(self):
+        """Return string representation of Note."""
         return "Note('{note}')".format(note=self.note)

@@ -66,6 +66,7 @@ class Chord:
         return self
 
     def __str__(self):
+        """Return string representation of Chord."""
         return "{root}{suffix}/{bass}".format(
             root=self.root,
             suffix=self.suffix,
@@ -74,6 +75,7 @@ class Chord:
             suffix=self.suffix)
 
     def __repr__(self):
+        """Return string representation of Chord."""
         return "Chord('{root}', '{suffix}', '{bass}')".format(
             root=self.root,
             suffix=self.suffix,

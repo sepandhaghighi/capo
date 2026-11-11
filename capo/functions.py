@@ -7,7 +7,6 @@ from .note import Note
 from .chord import Chord
 from .utils import _validate_semitones, _validate_chords, _validate_capo_position, _validate_key, _extract_parts, _cosine_similarity, _rotate_list
 from .params import NOTES_SHARP
-from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE
 from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE

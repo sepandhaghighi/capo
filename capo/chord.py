@@ -80,6 +80,12 @@ class Chord:
                 semitones, flat_mode).note
 
         return self
+    
+    @property
+    def pitch_classes(self) -> list:
+        """Return pitch classes of Chord."""
+        root_pc = Note(self.root).pitch_class
+        return [(root_pc + interval) % 12 for interval in CHORD_QUALITIES.get(self.suffix, [0])]
 
     def __str__(self):
         """Return string representation of Chord."""

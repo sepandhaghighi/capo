@@ -45,7 +45,6 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     """
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
-
     semitones = current_capo - target_capo
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
 

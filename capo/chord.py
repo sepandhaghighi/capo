@@ -57,9 +57,9 @@ class Chord:
         root, suffix, bass = _extract_parts(chord)
 
         instance = cls.__new__(cls)
-        instance.root = Note(root).note
-        instance.suffix = suffix
-        instance.bass = Note(bass).note if bass and validate_bass else bass
+        instance._root = Note(root).note
+        instance._suffix = suffix
+        instance._bass = Note(bass).note if bass and validate_bass else bass
 
         return instance
 

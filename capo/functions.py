@@ -64,9 +64,8 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
     for chord in chords:
         try:
             chord_obj = Chord._from_string(chord, validate_bass=False)
-            root_pc = NOTES_SHARP.index(Note(chord_obj.root).note)
-            for interval in CHORD_QUALITIES.get(chord_obj.suffix, [0]):
-                pc_vector[(root_pc + interval) % 12] += 1
+            for pitch_class in chord_obj.pitch_classes:
+                pc_vector[pitch_class] += 1
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     scores = dict()

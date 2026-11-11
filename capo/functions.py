@@ -7,7 +7,6 @@ from .note import Note
 from .chord import Chord
 from .utils import _validate_semitones, _validate_chords, _validate_capo_position, _validate_key, _extract_parts, _cosine_similarity, _rotate_list
 from .params import NOTES_SHARP
-from .params import CHORD_QUALITIES
 from .params import CHORDS_TYPE_ERROR_MESSAGE, CAPO_POSITION_ERROR_MESSAGE
 from .params import CHORD_FORMAT_ERROR_MESSAGE
 from .params import KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
@@ -46,7 +45,7 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     """
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
-
+    
     semitones = current_capo - target_capo
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
 
@@ -64,9 +63,8 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
     for chord in chords:
         try:
             chord_obj = Chord._from_string(chord, validate_bass=False)
-            root_pc = NOTES_SHARP.index(Note(chord_obj.root).note)
-            for interval in CHORD_QUALITIES.get(chord_obj.suffix, [0]):
-                pc_vector[(root_pc + interval) % 12] += 1
+            for pitch_class in chord_obj.pitch_classes:
+                pc_vector[pitch_class] += 1
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     scores = dict()
@@ -116,9 +114,9 @@ def transpose_to_key(
     target_root, _, _ = _extract_parts(target_key)
     current_root, _, _ = _extract_parts(current_key)
 
-    target_pc = NOTES_SHARP.index(Note(target_root).note)
+    target_pc = Note(target_root).pitch_class
 
-    current_pc = NOTES_SHARP.index(Note(current_root).note)
+    current_pc = Note(current_root).pitch_class
 
     semitones = target_pc - current_pc
 

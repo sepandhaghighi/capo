@@ -35,6 +35,11 @@ class Note:
         self.note = _transpose_note(
             self.note, semitones, flat_mode)
         return self
+    
+    @property
+    def pitch_class(self) -> int:
+        """Return pitch class of Note."""
+        return NOTES_SHARP.index(self.note)
 
     def __str__(self):
         """Return string representation of Note."""

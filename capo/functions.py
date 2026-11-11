@@ -115,9 +115,9 @@ def transpose_to_key(
     target_root, _, _ = _extract_parts(target_key)
     current_root, _, _ = _extract_parts(current_key)
 
-    target_pc = NOTES_SHARP.index(Note(target_root).note)
+    target_pc = Note(target_root).pitch_class
 
-    current_pc = NOTES_SHARP.index(Note(current_root).note)
+    current_pc = Note(current_root).pitch_class
 
     semitones = target_pc - current_pc
 

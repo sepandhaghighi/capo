@@ -3,7 +3,7 @@
 
 from .errors import CapoValidationError
 from .note import Note
-from .utils import _validate_semitones, _extract_parts, _normalize_note
+from .utils import _validate_semitones, _extract_parts
 from .params import NOTES_SHARP, CHORD_QUALITIES
 from .params import CHORD_FORMAT_ERROR_MESSAGE
 

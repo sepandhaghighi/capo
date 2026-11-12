@@ -24,7 +24,7 @@ class Note:
             raise CapoValidationError(
                 CHORD_FORMAT_ERROR_MESSAGE.format(chord=note))
 
-    def transpose(self, semitones: int, flat_mode: bool = False):
+    def transpose(self, semitones: int, flat_mode: bool = False) -> "Note":
         """
         Transpose note by semitones.
 
@@ -46,10 +46,10 @@ class Note:
         """Return pitch class of Note."""
         return NOTES_SHARP.index(self._note)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return string representation of Note."""
         return self._note
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return string representation of Note."""
         return "Note('{note}')".format(note=self._note)

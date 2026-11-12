@@ -42,9 +42,9 @@ class Chord:
                             root=root,
                             suffix=suffix)))
 
-        self.root = root
-        self.suffix = suffix
-        self.bass = bass
+        self._root = root
+        self._suffix = suffix
+        self._bass = bass
 
     @classmethod
     def _from_string(cls, chord: str, validate_bass: bool = True):
@@ -57,9 +57,9 @@ class Chord:
         root, suffix, bass = _extract_parts(chord)
 
         instance = cls.__new__(cls)
-        instance.root = Note(root).note
-        instance.suffix = suffix
-        instance.bass = Note(bass).note if bass and validate_bass else bass
+        instance._root = Note(root).note
+        instance._suffix = suffix
+        instance._bass = Note(bass).note if bass and validate_bass else bass
 
         return instance
 
@@ -72,33 +72,48 @@ class Chord:
         """
         _validate_semitones(semitones)
 
-        self.root = Note(self.root).transpose(
+        self._root = Note(self._root).transpose(
             semitones, flat_mode).note
 
-        if self.bass:
-            self.bass = Note(self.bass).transpose(
+        if self._bass:
+            self._bass = Note(self._bass).transpose(
                 semitones, flat_mode).note
 
         return self
     
     @property
+    def root(self) -> str:
+        """Return the root note of Chord."""
+        return self._root
+    
+    @property
+    def suffix(self) -> str:
+        """Return the chord quality suffix."""
+        return self._suffix
+    
+    @property
+    def bass(self) -> str:
+        """Return the bass note of the chord, if present."""
+        return self._bass
+
+    @property
     def pitch_classes(self) -> list:
         """Return pitch classes of Chord."""
-        root_pc = Note(self.root).pitch_class
-        return [(root_pc + interval) % 12 for interval in CHORD_QUALITIES.get(self.suffix, [0])]
+        root_pc = Note(self._root).pitch_class
+        return [(root_pc + interval) % 12 for interval in CHORD_QUALITIES.get(self._suffix, [0])]
 
     def __str__(self):
         """Return string representation of Chord."""
         return "{root}{suffix}/{bass}".format(
-            root=self.root,
-            suffix=self.suffix,
-            bass=self.bass) if self.bass else "{root}{suffix}".format(
-            root=self.root,
-            suffix=self.suffix)
+            root=self._root,
+            suffix=self._suffix,
+            bass=self._bass) if self._bass else "{root}{suffix}".format(
+            root=self._root,
+            suffix=self._suffix)
 
     def __repr__(self):
         """Return string representation of Chord."""
         return "Chord('{root}', '{suffix}', '{bass}')".format(
-            root=self.root,
-            suffix=self.suffix,
-            bass=self.bass)
+            root=self._root,
+            suffix=self._suffix,
+            bass=self._bass)

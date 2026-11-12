@@ -19,7 +19,7 @@ class Note:
         :param note: input note
         """
         try:
-            self.note = _transpose_note(note, semitones=0)
+            self._note = _transpose_note(note, semitones=0)
         except Exception:
             raise CapoValidationError(
                 CHORD_FORMAT_ERROR_MESSAGE.format(chord=note))
@@ -32,19 +32,24 @@ class Note:
         :param flat_mode: flat mode flag
         """
         _validate_semitones(semitones)
-        self.note = _transpose_note(
-            self.note, semitones, flat_mode)
+        self._note = _transpose_note(
+            self._note, semitones, flat_mode)
         return self
     
     @property
+    def note(self) -> str:
+        """Return the normalized note representation."""
+        return self._note
+
+    @property
     def pitch_class(self) -> int:
         """Return pitch class of Note."""
-        return NOTES_SHARP.index(self.note)
+        return NOTES_SHARP.index(self._note)
 
     def __str__(self):
         """Return string representation of Note."""
-        return self.note
+        return self._note
 
     def __repr__(self):
         """Return string representation of Note."""
-        return "Note('{note}')".format(note=self.note)
+        return "Note('{note}')".format(note=self._note)

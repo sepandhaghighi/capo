@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """capo chord."""
 
+from typing import Optional, Union, List
 from .errors import CapoValidationError
 from .note import Note
 from .utils import _validate_semitones, _extract_parts
@@ -11,7 +12,7 @@ from .params import CHORD_FORMAT_ERROR_MESSAGE
 class Chord:
     """Musical chord."""
 
-    def __init__(self, root: Note, suffix: str = "", bass: Note = None):
+    def __init__(self, root: Union[str, Note], suffix: str = "", bass: Optional[Union[str, Note]] = None):
         """
         Initialize a chord.
 
@@ -47,7 +48,7 @@ class Chord:
         self._bass = bass
 
     @classmethod
-    def _from_string(cls, chord: str, validate_bass: bool = True):
+    def _from_string(cls, chord: str, validate_bass: bool = True) -> "Chord":
         """
         Create a chord from its string representation.
 
@@ -63,7 +64,7 @@ class Chord:
 
         return instance
 
-    def transpose(self, semitones: int, flat_mode: bool = False):
+    def transpose(self, semitones: int, flat_mode: bool = False) -> "Chord":
         """
         Transpose chord by semitones.
 
@@ -90,17 +91,17 @@ class Chord:
         return self._suffix
     
     @property
-    def bass(self) -> Note:
+    def bass(self) -> Optional[Note]:
         """Return the bass note of the chord, if present."""
         return self._bass
 
     @property
-    def pitch_classes(self) -> list:
+    def pitch_classes(self) -> List[int]:
         """Return pitch classes of Chord."""
         root_pc = self._root.pitch_class
         return [(root_pc + interval) % 12 for interval in CHORD_QUALITIES.get(self._suffix, [0])]
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return string representation of Chord."""
         return "{root}{suffix}/{bass}".format(
             root=self._root.note,
@@ -109,7 +110,7 @@ class Chord:
             root=self._root.note,
             suffix=self._suffix)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return string representation of Chord."""
         return "Chord('{root}', '{suffix}', '{bass}')".format(
             root=self._root.note,

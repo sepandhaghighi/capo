@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """capo utils."""
 
-from typing import Any
+from typing import Any, List, Optional, Tuple
 from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT, ENHARMONIC_EQUIVALENTS
 from .params import SEMITONES_TYPE_ERROR_MESSAGE, CHORDS_TYPE_ERROR_MESSAGE
 from .params import CAPO_POSITION_ERROR_MESSAGE, KEY_TYPE_ERROR_MESSAGE, KEY_FORMAT_ERROR_MESSAGE
 
 
-def _cosine_similarity(vector1: list, vector2: list) -> float:
+def _cosine_similarity(vector1: List[float], vector2: List[float]) -> float:
     """
     Cosine similarity.
 
@@ -59,7 +59,7 @@ def _transpose_note(note: str, semitones: int, flat_mode: bool = False) -> str:
     return notes_system[new_index]
 
 
-def _extract_parts(chord: str) -> tuple:
+def _extract_parts(chord: str) -> Tuple[str, str, Optional[str]]:
     """
     Split a chord into root, suffix, and optional bass note (for slash chords).
 

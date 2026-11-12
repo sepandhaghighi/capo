@@ -3,7 +3,7 @@
 
 from .errors import CapoValidationError
 from .note import Note
-from .utils import _validate_semitones, _extract_parts, _normalize_note
+from .utils import _validate_semitones, _extract_parts
 from .params import NOTES_SHARP, CHORD_QUALITIES
 from .params import CHORD_FORMAT_ERROR_MESSAGE
 
@@ -11,7 +11,7 @@ from .params import CHORD_FORMAT_ERROR_MESSAGE
 class Chord:
     """Musical chord."""
 
-    def __init__(self, root: str, suffix: str = "", bass: str = None):
+    def __init__(self, root: Note, suffix: str = "", bass: Note = None):
         """
         Initialize a chord.
 
@@ -20,16 +20,16 @@ class Chord:
         :param bass: optional bass note
         """
         try:
-            root = _normalize_note(root)
-            if root not in NOTES_SHARP:
+            root = Note(root) if isinstance(root, str) else root
+            if not isinstance(root, Note) or root.note not in NOTES_SHARP:
                 raise ValueError
 
             if suffix not in CHORD_QUALITIES:
                 raise ValueError
 
             if bass is not None:
-                bass = _normalize_note(bass)
-                if bass not in NOTES_SHARP:
+                bass = Note(bass) if isinstance(bass, str) else bass
+                if not isinstance(bass, Note) or bass.note not in NOTES_SHARP:
                     raise ValueError
 
         except Exception:
@@ -57,9 +57,9 @@ class Chord:
         root, suffix, bass = _extract_parts(chord)
 
         instance = cls.__new__(cls)
-        instance._root = Note(root).note
+        instance._root = Note(root)
         instance._suffix = suffix
-        instance._bass = Note(bass).note if bass and validate_bass else bass
+        instance._bass = Note(bass) if bass and validate_bass else bass
 
         return instance
 
@@ -72,17 +72,15 @@ class Chord:
         """
         _validate_semitones(semitones)
 
-        self._root = Note(self._root).transpose(
-            semitones, flat_mode).note
+        self._root.transpose(semitones, flat_mode)
 
         if self._bass:
-            self._bass = Note(self._bass).transpose(
-                semitones, flat_mode).note
+            self._bass.transpose(semitones, flat_mode)
 
         return self
     
     @property
-    def root(self) -> str:
+    def root(self) -> Note:
         """Return the root note of Chord."""
         return self._root
     
@@ -92,28 +90,28 @@ class Chord:
         return self._suffix
     
     @property
-    def bass(self) -> str:
+    def bass(self) -> Note:
         """Return the bass note of the chord, if present."""
         return self._bass
 
     @property
     def pitch_classes(self) -> list:
         """Return pitch classes of Chord."""
-        root_pc = Note(self._root).pitch_class
+        root_pc = self._root.pitch_class
         return [(root_pc + interval) % 12 for interval in CHORD_QUALITIES.get(self._suffix, [0])]
 
     def __str__(self):
         """Return string representation of Chord."""
         return "{root}{suffix}/{bass}".format(
-            root=self._root,
+            root=self._root.note,
             suffix=self._suffix,
-            bass=self._bass) if self._bass else "{root}{suffix}".format(
-            root=self._root,
+            bass=self._bass.note) if self._bass else "{root}{suffix}".format(
+            root=self._root.note,
             suffix=self._suffix)
 
     def __repr__(self):
         """Return string representation of Chord."""
         return "Chord('{root}', '{suffix}', '{bass}')".format(
-            root=self._root,
+            root=self._root.note,
             suffix=self._suffix,
-            bass=self._bass)
+            bass=self._bass.note if self._bass else None)

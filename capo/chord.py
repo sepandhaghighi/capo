@@ -12,7 +12,7 @@ from .params import CHORD_FORMAT_ERROR_MESSAGE
 class Chord:
     """Musical chord."""
 
-    def __init__(self, root: Union[str, Note], suffix: str = "", bass: Optional[Union[str, Note]] = None):
+    def __init__(self, root: Union[str, Note], suffix: str = "", bass: Optional[Union[str, Note]] = None) -> None:
         """
         Initialize a chord.
 

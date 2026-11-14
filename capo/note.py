@@ -12,7 +12,7 @@ from .utils import _validate_semitones, _transpose_note
 class Note:
     """Musical note."""
 
-    def __init__(self, note: str):
+    def __init__(self, note: str) -> None:
         """
         Initialize a note.
 

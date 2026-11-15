@@ -94,6 +94,28 @@ class Chord:
     def bass(self) -> Optional[Note]:
         """Return the bass note of the chord, if present."""
         return self._bass
+    
+    @property
+    def sharp_notation(self) -> str:
+        """Return the sharp notation of Chord."""
+        root = self._root.sharp_notation
+        if self._bass:
+            return "{root}{suffix}/{bass}".format(
+                root=root,
+                suffix=self._suffix,
+                bass=self._bass.sharp_notation)
+        return "{root}{suffix}".format(root=root, suffix=self._suffix)
+
+    @property
+    def flat_notation(self) -> str:
+        """Return the flat notation of Chord."""
+        root = self._root.flat_notation
+        if self._bass:
+            return "{root}{suffix}/{bass}".format(
+                root=root,
+                suffix=self._suffix,
+                bass=self._bass.flat_notation)
+        return "{root}{suffix}".format(root=root, suffix=self._suffix)
 
     @property
     def pitch_classes(self) -> List[int]:

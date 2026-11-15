@@ -41,7 +41,6 @@ class Note:
         """Return the normalized note representation."""
         return self._note
     
-
     @property
     def sharp_notation(self) -> str:
         """Return the sharp notation of Note."""
@@ -59,7 +58,7 @@ class Note:
 
     def __str__(self) -> str:
         """Return string representation of Note."""
-        return self._note
+        return self.sharp_notation
 
     def __repr__(self) -> str:
         """Return string representation of Note."""

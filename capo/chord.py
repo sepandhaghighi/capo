@@ -125,12 +125,7 @@ class Chord:
 
     def __str__(self) -> str:
         """Return string representation of Chord."""
-        return "{root}{suffix}/{bass}".format(
-            root=self._root.note,
-            suffix=self._suffix,
-            bass=self._bass.note) if self._bass else "{root}{suffix}".format(
-            root=self._root.note,
-            suffix=self._suffix)
+        return self.sharp_notation
 
     def __repr__(self) -> str:
         """Return string representation of Chord."""

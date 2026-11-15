@@ -40,6 +40,17 @@ class Note:
     def note(self) -> str:
         """Return the normalized note representation."""
         return self._note
+    
+
+    @property
+    def sharp_notation(self) -> str:
+        """Return the sharp notation of Note."""
+        return NOTES_SHARP[self.pitch_class]
+
+    @property
+    def flat_notation(self) -> str:
+        """Return the flat notation of Note."""
+        return NOTES_FLAT[self.pitch_class]
 
     @property
     def pitch_class(self) -> int:

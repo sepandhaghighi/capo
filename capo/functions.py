@@ -28,7 +28,7 @@ def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> Lis
     result = []
     for chord in chords:
         try:
-            result.append(str(Chord._from_string(chord).transpose(semitones, flat_mode)))
+            result.append(str(Chord.from_string(chord).transpose(semitones, flat_mode)))
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result
@@ -62,7 +62,7 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
 
     for chord in chords:
         try:
-            chord_obj = Chord._from_string(chord, validate_bass=False)
+            chord_obj = Chord.from_string(chord, validate_bass=False)
             for pitch_class in chord_obj.pitch_classes:
                 pc_vector[pitch_class] += 1
         except Exception:
@@ -72,7 +72,7 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
         profile_major = _rotate_list(KRUMHANSL_SCHMUCKLER_MAJOR_PROFILE, i)
         profile_minor = _rotate_list(KRUMHANSL_SCHMUCKLER_MINOR_PROFILE, i)
         key_major = str(Note(note).transpose(0, flat_mode))
-        key_minor = str(Chord._from_string("{note}m".format(note=note)).transpose(0, flat_mode))
+        key_minor = str(Chord.from_string("{note}m".format(note=note)).transpose(0, flat_mode))
         scores[key_major] = _cosine_similarity(pc_vector, profile_major)
         scores[key_minor] = _cosine_similarity(pc_vector, profile_minor)
 

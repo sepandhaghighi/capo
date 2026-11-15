@@ -48,7 +48,7 @@ class Chord:
         self._bass = bass
 
     @classmethod
-    def _from_string(cls, chord: str, validate_bass: bool = True) -> "Chord":
+    def from_string(cls, chord: str, validate_bass: bool = True) -> "Chord":
         """
         Create a chord from its string representation.
 

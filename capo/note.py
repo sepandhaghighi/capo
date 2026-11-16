@@ -58,7 +58,7 @@ class Note:
 
     def __str__(self) -> str:
         """Return string representation of Note."""
-        return self.sharp_notation
+        return self._note
 
     def __repr__(self) -> str:
         """Return string representation of Note."""

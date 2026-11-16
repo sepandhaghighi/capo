@@ -5,7 +5,7 @@ from .errors import CapoValidationError
 from .params import NOTES_SHARP, NOTES_FLAT
 from .params import ENHARMONIC_EQUIVALENTS
 from .params import CHORD_FORMAT_ERROR_MESSAGE
-from .utils import _validate_semitones, _transpose_note
+from .utils import _validate_semitones, _transpose_note, _normalize_note
 
 
 
@@ -19,7 +19,11 @@ class Note:
         :param note: input note
         """
         try:
-            self._note = _transpose_note(note, semitones=0)
+            if note not in NOTES_SHARP and note not in NOTES_FLAT:
+                note = _normalize_note(note)
+                if note not in NOTES_SHARP:
+                    raise ValueError
+            self._note = note
         except Exception:
             raise CapoValidationError(
                 CHORD_FORMAT_ERROR_MESSAGE.format(chord=note))
@@ -38,7 +42,7 @@ class Note:
     
     @property
     def note(self) -> str:
-        """Return the normalized note representation."""
+        """Return the original note representation."""
         return self._note
     
     @property
@@ -54,7 +58,7 @@ class Note:
     @property
     def pitch_class(self) -> int:
         """Return pitch class of Note."""
-        return NOTES_SHARP.index(self._note)
+        return NOTES_SHARP.index(_normalize_note(self._note))
 
     def __str__(self) -> str:
         """Return string representation of Note."""

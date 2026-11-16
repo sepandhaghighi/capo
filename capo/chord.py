@@ -22,7 +22,7 @@ class Chord:
         """
         try:
             root = Note(root) if isinstance(root, str) else root
-            if not isinstance(root, Note) or root.note not in NOTES_SHARP:
+            if not isinstance(root, Note):
                 raise ValueError
 
             if suffix not in CHORD_QUALITIES:
@@ -30,7 +30,7 @@ class Chord:
 
             if bass is not None:
                 bass = Note(bass) if isinstance(bass, str) else bass
-                if not isinstance(bass, Note) or bass.note not in NOTES_SHARP:
+                if not isinstance(bass, Note):
                     raise ValueError
 
         except Exception:

@@ -138,3 +138,13 @@ class Chord:
             root=self._root.note,
             suffix=self._suffix,
             bass=self._bass.note if self._bass else None)
+
+    def __eq__(self, other: object) -> bool:
+        """Check equality of Chord."""
+        if not isinstance(other, Chord):
+            return False
+        return (
+            self._root == other._root and
+            self._suffix == other._suffix and
+            self._bass == other._bass
+        )

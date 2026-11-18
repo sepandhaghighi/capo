@@ -67,3 +67,9 @@ class Note:
     def __repr__(self) -> str:
         """Return string representation of Note."""
         return "Note('{note}')".format(note=self._note)
+    
+    def __eq__(self, other: object) -> bool:
+        """Check equality of Note."""
+        if not isinstance(other, Note):
+            return False
+        return self.pitch_class == other.pitch_class

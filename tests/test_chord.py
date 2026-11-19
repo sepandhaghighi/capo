@@ -29,27 +29,27 @@ def test_chord_init_without_bass():
 
 
 def test_chord_init_error_root():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `invalid`"):
         _ = Chord("invalid")
 
 
 def test_chord_init_error_suffix():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `Cinvalid`"):
         _ = Chord("C", "invalid")
 
 
 def test_chord_init_error_bass():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `C/invalid`"):
         _ = Chord("C", "", "invalid")
 
 
 def test_chord_init_error_root_type():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `1`"):
         _ = Chord(1)
 
 
 def test_chord_init_error_bass_type():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `C/1`"):
         _ = Chord("C", "", 1)
 
 

@@ -28,12 +28,12 @@ def test_note_init_double_accidental():
 
 
 def test_note_init_error():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `H`"):
         _ = Note("H")
 
 
 def test_note_init_error_type():
-    with pytest.raises(CapoValidationError):
+    with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `1`"):
         _ = Note(1)
 
 

@@ -126,7 +126,7 @@ def test_chord_pitch_classes_minor():
 
 
 def test_chord_pitch_classes_unknown_suffix_from_string():
-    assert Chord.from_string("Cunknown").pitch_classes == [0]
+    assert Chord.from_string("Cunknown", validate_suffix=False).pitch_classes == [0]
 
 
 def test_chord_string_and_repr():

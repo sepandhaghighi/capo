@@ -12,20 +12,21 @@ from .params import CHORD_FORMAT_ERROR_MESSAGE
 class Chord:
     """Musical chord."""
 
-    def __init__(self, root: Union[str, Note], suffix: str = "", bass: Optional[Union[str, Note]] = None) -> None:
+    def __init__(self, root: Union[str, Note], suffix: str = "", bass: Optional[Union[str, Note]] = None, validate_suffix: bool = True) -> None:
         """
         Initialize a chord.
 
         :param root: chord root note
         :param suffix: chord quality
         :param bass: optional bass note
+        :param validate_suffix: validate chord quality suffix
         """
         try:
             root = Note(root) if isinstance(root, str) else root
             if not isinstance(root, Note):
                 raise ValueError
 
-            if suffix not in CHORD_QUALITIES:
+            if validate_suffix and suffix not in CHORD_QUALITIES:
                 raise ValueError
 
             if bass is not None:
@@ -48,21 +49,15 @@ class Chord:
         self._bass = bass
 
     @classmethod
-    def from_string(cls, chord: str, validate_bass: bool = True) -> "Chord":
+    def from_string(cls, chord: str, validate_suffix: bool = True) -> "Chord":
         """
         Create a chord from its string representation.
 
         :param chord: input chord
-        :param validate_bass: validate optional bass note
+        :param validate_suffix: validate chord quality suffix
         """
         root, suffix, bass = _extract_parts(chord)
-
-        instance = cls.__new__(cls)
-        instance._root = Note(root)
-        instance._suffix = suffix
-        instance._bass = Note(bass) if bass and validate_bass else bass
-
-        return instance
+        return cls(root, suffix, bass, validate_suffix)
 
     def transpose(self, semitones: int, flat_mode: bool = False) -> "Chord":
         """

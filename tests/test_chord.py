@@ -38,6 +38,12 @@ def test_chord_init_error_suffix():
         _ = Chord("C", "invalid")
 
 
+def test_chord_init_without_suffix_validation():
+    result = Chord("C", "unknown", validate_suffix=False)
+    assert result.suffix == "unknown"
+    assert result.pitch_classes == [0]
+
+
 def test_chord_init_error_bass():
     with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `C/invalid`"):
         _ = Chord("C", "", "invalid")
@@ -68,9 +74,16 @@ def test_chord_from_string_without_bass():
     assert result.bass is None
 
 
-def test_chord_from_string_without_bass_validation():
-    result = Chord.from_string("C/Gb", validate_bass=False)
-    assert result.bass == "F#"
+def test_chord_from_string_without_suffix_validation():
+    result = Chord.from_string("Cunknown", validate_suffix=False)
+    assert result.suffix == "unknown"
+    assert result.pitch_classes == [0]
+
+
+def test_chord_from_string_bass_is_note():
+    result = Chord.from_string("C/Gb")
+    assert isinstance(result.bass, Note)
+    assert result.bass == Note("F#")
 
 
 def test_chord_transpose():

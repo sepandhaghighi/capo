@@ -62,7 +62,7 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
 
     for chord in chords:
         try:
-            chord_obj = Chord.from_string(chord, validate_bass=False)
+            chord_obj = Chord.from_string(chord, validate_suffix=False)
             for pitch_class in chord_obj.pitch_classes:
                 pc_vector[pitch_class] += 1
         except Exception:

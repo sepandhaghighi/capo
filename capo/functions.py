@@ -133,19 +133,21 @@ def transpose_to_key(
         validate_suffix=validate_suffix)
 
 
-def sharp_to_flat(chords: List[str]) -> List[str]:
+def sharp_to_flat(chords: List[str], validate_suffix: bool = True) -> List[str]:
     """
     Convert chords from sharp notation to flat notation.
 
     :param chords: chords list
+    :param validate_suffix: validate chord quality suffix
     """
-    return transpose(chords, semitones=0, flat_mode=True)
+    return transpose(chords, semitones=0, flat_mode=True, validate_suffix: bool = True)
 
 
-def flat_to_sharp(chords: List[str]) -> List[str]:
+def flat_to_sharp(chords: List[str], validate_suffix: bool = True) -> List[str]:
     """
     Convert chords from flat notation to sharp notation.
 
     :param chords: chords list
+    :param validate_suffix: validate chord quality suffix
     """
-    return transpose(chords, semitones=0, flat_mode=False)
+    return transpose(chords, semitones=0, flat_mode=False, validate_suffix: bool = True)

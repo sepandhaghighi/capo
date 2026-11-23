@@ -82,14 +82,15 @@ def key_scores(chords: List[str], flat_mode: bool = False, validate_suffix: bool
     return scores
 
 
-def detect_key(chords: List[str], flat_mode: bool = False) -> str:
+def detect_key(chords: List[str], flat_mode: bool = False, validate_suffix: bool = True) -> str:
     """
     Infer the most likely musical key from a list of chords.
 
     :param chords: chords list
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
-    scores = key_scores(chords=chords, flat_mode=flat_mode)
+    scores = key_scores(chords=chords, flat_mode=flat_mode, validate_suffix=validate_suffix)
     best_key = max(scores, key=scores.get)
     return best_key
 

@@ -100,7 +100,8 @@ def transpose_to_key(
         chords: List[str],
         target_key: str,
         current_key: str = "auto",
-        flat_mode: bool = False) -> List[str]:
+        flat_mode: bool = False,
+        validate_suffix: bool = True) -> List[str]:
     """
     Transpose a list of chords from one musical key to another.
 
@@ -108,12 +109,13 @@ def transpose_to_key(
     :param target_key: target key
     :param current_key: current key, "auto" means detect automatically
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     _validate_key(target_key, current_key)
 
     if current_key.strip().lower() == "auto":
-        current_key = detect_key(chords)
+        current_key = detect_key(chords, validate_suffix=validate_suffix)
 
     target_root, _, _ = _extract_parts(target_key)
     current_root, _, _ = _extract_parts(current_key)
@@ -127,7 +129,8 @@ def transpose_to_key(
     return transpose(
         chords=chords,
         semitones=semitones,
-        flat_mode=flat_mode)
+        flat_mode=flat_mode,
+        validate_suffix=validate_suffix)
 
 
 def sharp_to_flat(chords: List[str]) -> List[str]:

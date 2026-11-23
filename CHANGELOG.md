@@ -17,8 +17,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `m(maj11)` chord quality
 - `m(maj13)` chord quality
 ### Changed
+- `validate_suffix` parameter added to `transpose` function
+- `validate_suffix` parameter added to `capo_map` function
+- `validate_suffix` parameter added to `key_scores` function
+- `validate_suffix` parameter added to `detect_key` function
+- `validate_suffix` parameter added to `transpose_to_key` function
+- `validate_suffix` parameter added to `sharp_to_flat` function
+- `validate_suffix` parameter added to `flat_to_sharp` function
 - `README.md` updated
 - Dependencies structure modified
+- Test system modified
 - Build system modified
 - `Python 3.15` added to `test.yml`
 ## [0.7] - 2026-02-12

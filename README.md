@@ -140,6 +140,19 @@ Converts chord notation between sharp and flat representations without changing 
 ['A#', 'C#', 'F#m', 'G#7']
 ```
 
+### Chord Suffix Validation
+
+All chord-processing functions validate chord quality suffixes by default.
+Set `validate_suffix=False` to allow unknown chord suffixes.
+
+```pycon
+>>> from capo import transpose
+>>> transpose(["Cunknown"], semitones=2)
+CapoValidationError: invalid chord format or unknown note: `Cunknown`
+>>> transpose(["Cunknown"], semitones=2, validate_suffix=False)
+['Dunknown']
+```
+
 ## Issues & Bug Reports			
 
 Just fill an issue and describe it. We'll check it ASAP!

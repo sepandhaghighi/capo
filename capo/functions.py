@@ -15,26 +15,27 @@ from .params import KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
 
 
 
-def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
+def transpose(chords: List[str], semitones: int, flat_mode: bool = False, validate_suffix: bool = True) -> List[str]:
     """
     Transpose chords by semitones.
 
     :param chords: chords list
     :param semitones: semitones
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     _validate_semitones(semitones)
     result = []
     for chord in chords:
         try:
-            result.append(str(Chord.from_string(chord, validate_suffix=False).transpose(semitones, flat_mode)))
+            result.append(str(Chord.from_string(chord, validate_suffix=validate_suffix).transpose(semitones, flat_mode)))
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result
 
 
-def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False) -> List[str]:
+def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False, validate_suffix: bool = True) -> List[str]:
     """
     Map a list of chords from current capo to target capo position.
 
@@ -42,27 +43,29 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     :param target_capo: target capo position
     :param current_capo: current capo position
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
     
     semitones = current_capo - target_capo
-    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
+    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode, validate_suffix=validate_suffix)
 
 
-def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
+def key_scores(chords: List[str], flat_mode: bool = False, validate_suffix: bool = True) -> Dict[str, float]:
     """
     Return scores for all possible keys based on a list of chords.
 
     :param chords: chords list
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     pc_vector = [0] * 12
 
     for chord in chords:
         try:
-            chord_obj = Chord.from_string(chord, validate_suffix=False)
+            chord_obj = Chord.from_string(chord, validate_suffix=validate_suffix)
             for pitch_class in chord_obj.pitch_classes:
                 pc_vector[pitch_class] += 1
         except Exception:
@@ -79,14 +82,15 @@ def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
     return scores
 
 
-def detect_key(chords: List[str], flat_mode: bool = False) -> str:
+def detect_key(chords: List[str], flat_mode: bool = False, validate_suffix: bool = True) -> str:
     """
     Infer the most likely musical key from a list of chords.
 
     :param chords: chords list
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
-    scores = key_scores(chords=chords, flat_mode=flat_mode)
+    scores = key_scores(chords=chords, flat_mode=flat_mode, validate_suffix=validate_suffix)
     best_key = max(scores, key=scores.get)
     return best_key
 
@@ -96,7 +100,8 @@ def transpose_to_key(
         chords: List[str],
         target_key: str,
         current_key: str = "auto",
-        flat_mode: bool = False) -> List[str]:
+        flat_mode: bool = False,
+        validate_suffix: bool = True) -> List[str]:
     """
     Transpose a list of chords from one musical key to another.
 
@@ -104,12 +109,13 @@ def transpose_to_key(
     :param target_key: target key
     :param current_key: current key, "auto" means detect automatically
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     _validate_key(target_key, current_key)
 
     if current_key.strip().lower() == "auto":
-        current_key = detect_key(chords)
+        current_key = detect_key(chords, validate_suffix=validate_suffix)
 
     target_root, _, _ = _extract_parts(target_key)
     current_root, _, _ = _extract_parts(current_key)
@@ -123,22 +129,25 @@ def transpose_to_key(
     return transpose(
         chords=chords,
         semitones=semitones,
-        flat_mode=flat_mode)
+        flat_mode=flat_mode,
+        validate_suffix=validate_suffix)
 
 
-def sharp_to_flat(chords: List[str]) -> List[str]:
+def sharp_to_flat(chords: List[str], validate_suffix: bool = True) -> List[str]:
     """
     Convert chords from sharp notation to flat notation.
 
     :param chords: chords list
+    :param validate_suffix: validate chord quality suffix
     """
-    return transpose(chords, semitones=0, flat_mode=True)
+    return transpose(chords, semitones=0, flat_mode=True, validate_suffix=validate_suffix)
 
 
-def flat_to_sharp(chords: List[str]) -> List[str]:
+def flat_to_sharp(chords: List[str], validate_suffix: bool = True) -> List[str]:
     """
     Convert chords from flat notation to sharp notation.
 
     :param chords: chords list
+    :param validate_suffix: validate chord quality suffix
     """
-    return transpose(chords, semitones=0, flat_mode=False)
+    return transpose(chords, semitones=0, flat_mode=False, validate_suffix=validate_suffix)

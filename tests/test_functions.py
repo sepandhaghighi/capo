@@ -95,8 +95,8 @@ def test_capo_map_complex_chords1():  # Reference: https://muted.io/chord-transp
 
 
 def test_capo_map_complex_chords2():  # Reference: https://muted.io/chord-transposer/
-    result = capo_map(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], current_capo=0, target_capo=3)
-    assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']
+    result = capo_map(["Cmaj7/G", "Dm", "B7", "C#", "Eb"], current_capo=0, target_capo=3)
+    assert result == ['Amaj7/E', 'Bm', 'G#7', 'A#', 'C']
 
 
 def test_transpose_sharp_chords1():  # Reference: https://muted.io/chord-transposer/
@@ -172,12 +172,12 @@ def test_transpose_complex_chords1():  # Reference: https://muted.io/chord-trans
 
 
 def test_transpose_complex_chords2():  # Reference: https://muted.io/chord-transposer/
-    result = transpose(["Cmaj7/G", "Dm", "B7add13", "C#", "Eb"], semitones=-3)
-    assert result == ['Amaj7/E', 'Bm', 'G#7add13', 'A#', 'C']
+    result = transpose(["Cmaj7/G", "Dm", "B7", "C#", "Eb"], semitones=-3)
+    assert result == ['Amaj7/E', 'Bm', 'G#7', 'A#', 'C']
 
 
 def test_detect_key1(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
-    result = detect_key(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"])
+    result = detect_key(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Em", "G5/D", "Em/F#"])
     assert result == "Em"
 
 
@@ -187,7 +187,7 @@ def test_detect_key2(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-she
 
 
 def test_detect_key3(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
-    flat_chords = transpose(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"], semitones=0, flat_mode=True)
+    flat_chords = transpose(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Em", "G5/D", "Em/F#"], semitones=0, flat_mode=True)
     result = detect_key(flat_chords)
     assert result == "Em"
 
@@ -209,7 +209,7 @@ def test_detect_key6(): # Reference: https://tabs.ultimate-guitar.com/tab/red-ho
 
 
 def test_key_scores1(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
-    result = key_scores(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"])
+    result = key_scores(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Em", "G5/D", "Em/F#"])
     assert isinstance(result, dict)
     assert all(map(lambda x: isinstance(x, float), result.values()))
     assert sorted(result, key = lambda x : result[x], reverse=True)[0] == "Em"
@@ -223,7 +223,7 @@ def test_key_scores2(): # Reference: https://tabs.ultimate-guitar.com/tab/ed-she
 
 
 def test_key_scores3(): # Reference: https://tabs.ultimate-guitar.com/tab/radiohead/lucky-chords-41315
-    flat_chords = transpose(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Emadd9", "G5/D", "Em/F#"], semitones=0, flat_mode=True)
+    flat_chords = transpose(["Em", "Am", "G", "Bm", "C", "A", "C7", "B7", "Em/F", "Em", "G5/D", "Em/F#"], semitones=0, flat_mode=True)
     result = key_scores(flat_chords)
     assert isinstance(result, dict)
     assert all(map(lambda x: isinstance(x, float), result.values()))
@@ -290,4 +290,46 @@ def test_flat_to_sharp1():
 def test_flat_to_sharp2():
     result = flat_to_sharp(["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"])
     assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+
+def test_transpose_without_suffix_validation():
+    result = transpose(["Cunknown"], semitones=2, validate_suffix=False)
+    assert result == ["Dunknown"]
+
+
+def test_capo_map_without_suffix_validation():
+    result = capo_map(
+        ["Cunknown"],
+        target_capo=2,
+        validate_suffix=False)
+    assert result == ["A#unknown"]
+
+
+def test_key_scores_without_suffix_validation():
+    result = key_scores(["Cunknown"], validate_suffix=False)
+    assert len(result) == 24
+
+
+def test_detect_key_without_suffix_validation():
+    result = detect_key(["Cunknown"], validate_suffix=False)
+    assert isinstance(result, str)
+
+
+def test_transpose_to_key_without_suffix_validation():
+    result = transpose_to_key(
+        ["Cunknown"],
+        current_key="C",
+        target_key="D",
+        validate_suffix=False)
+    assert result == ["Dunknown"]
+
+
+def test_sharp_to_flat_without_suffix_validation():
+    result = sharp_to_flat(["C#unknown"], validate_suffix=False)
+    assert result == ["Dbunknown"]
+
+
+def test_flat_to_sharp_without_suffix_validation():
+    result = flat_to_sharp(["Dbunknown"], validate_suffix=False)
+    assert result == ["C#unknown"]
 

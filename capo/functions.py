@@ -35,7 +35,7 @@ def transpose(chords: List[str], semitones: int, flat_mode: bool = False, valida
     return result
 
 
-def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False) -> List[str]:
+def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mode: bool = False, validate_suffix: bool = True) -> List[str]:
     """
     Map a list of chords from current capo to target capo position.
 
@@ -43,12 +43,13 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     :param target_capo: target capo position
     :param current_capo: current capo position
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     _validate_capo_position(target_capo, current_capo)
     
     semitones = current_capo - target_capo
-    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode)
+    return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode, validate_suffix=validate_suffix)
 
 
 def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:

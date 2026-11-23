@@ -1,6 +1,6 @@
 import pytest
 from capo import capo_map, transpose, transpose_to_key
-from capo import detect_key, key_scores
+from capo import detect_key, key_scores, sharp_to_flat, flat_to_sharp
 from capo import CapoValidationError
 
 TEST_CASE_NAME = "Errors tests"

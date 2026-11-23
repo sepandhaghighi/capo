@@ -52,19 +52,20 @@ def capo_map(chords: List[str], target_capo: int, current_capo: int = 0, flat_mo
     return transpose(chords=chords, semitones=semitones, flat_mode=flat_mode, validate_suffix=validate_suffix)
 
 
-def key_scores(chords: List[str], flat_mode: bool = False) -> Dict[str, float]:
+def key_scores(chords: List[str], flat_mode: bool = False, validate_suffix: bool = True) -> Dict[str, float]:
     """
     Return scores for all possible keys based on a list of chords.
 
     :param chords: chords list
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     pc_vector = [0] * 12
 
     for chord in chords:
         try:
-            chord_obj = Chord.from_string(chord, validate_suffix=False)
+            chord_obj = Chord.from_string(chord, validate_suffix=validate_suffix)
             for pitch_class in chord_obj.pitch_classes:
                 pc_vector[pitch_class] += 1
         except Exception:

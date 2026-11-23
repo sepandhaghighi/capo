@@ -129,3 +129,36 @@ def test_detect_key_chord_format_error():
 def test_key_scores_chord_format_error():
     with pytest.raises(CapoValidationError, match=r"invalid chord format or unknown note: `s`"):
         _ = key_scores(chords=["A", "Am", "s"])
+
+
+def test_capo_map_chord_suffix_error():
+    with pytest.raises(CapoValidationError):
+        capo_map(["Cunknown"], current_capo=0, target_capo=2)
+
+
+def test_key_scores_chord_suffix_error():
+    with pytest.raises(CapoValidationError):
+        key_scores(["Cunknown"])
+
+
+def test_detect_key_chord_suffix_error():
+    with pytest.raises(CapoValidationError):
+        detect_key(["Cunknown"])
+
+
+def test_transpose_to_key_chord_suffix_error():
+    with pytest.raises(CapoValidationError):
+        transpose_to_key(
+            ["Cunknown"],
+            current_key="C",
+            target_key="D")
+
+
+def test_sharp_to_flat_chord_suffix_error():
+    with pytest.raises(CapoValidationError):
+        sharp_to_flat(["Cunknown"])
+
+
+def test_flat_to_sharp_chord_suffix_error():
+    with pytest.raises(CapoValidationError):
+        flat_to_sharp(["Cunknown"])

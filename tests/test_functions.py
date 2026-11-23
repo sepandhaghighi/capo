@@ -291,3 +291,45 @@ def test_flat_to_sharp2():
     result = flat_to_sharp(["C", "Db", "D", "Eb", "Fb", "F", "Gb", "G", "Ab", "A", "Bb", "Cb"])
     assert result == ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
+
+def test_transpose_without_suffix_validation():
+    result = transpose(["Cunknown"], semitones=2, validate_suffix=False)
+    assert result == ["Dunknown"]
+
+
+def test_capo_map_without_suffix_validation():
+    result = capo_map(
+        ["Cunknown"],
+        target_capo=2,
+        validate_suffix=False)
+    assert result == ["A#unknown"]
+
+
+def test_key_scores_without_suffix_validation():
+    result = key_scores(["Cunknown"], validate_suffix=False)
+    assert len(result) == 24
+
+
+def test_detect_key_without_suffix_validation():
+    result = detect_key(["Cunknown"], validate_suffix=False)
+    assert isinstance(result, str)
+
+
+def test_transpose_to_key_without_suffix_validation():
+    result = transpose_to_key(
+        ["Cunknown"],
+        current_key="C",
+        target_key="D",
+        validate_suffix=False)
+    assert result == ["Dunknown"]
+
+
+def test_sharp_to_flat_without_suffix_validation():
+    result = sharp_to_flat(["C#unknown"], validate_suffix=False)
+    assert result == ["Dbunknown"]
+
+
+def test_flat_to_sharp_without_suffix_validation():
+    result = flat_to_sharp(["Dbunknown"], validate_suffix=False)
+    assert result == ["C#unknown"]
+

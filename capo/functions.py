@@ -15,20 +15,21 @@ from .params import KRUMHANSL_SCHMUCKLER_MINOR_PROFILE
 
 
 
-def transpose(chords: List[str], semitones: int, flat_mode: bool = False) -> List[str]:
+def transpose(chords: List[str], semitones: int, flat_mode: bool = False, validate_suffix: bool = True) -> List[str]:
     """
     Transpose chords by semitones.
 
     :param chords: chords list
     :param semitones: semitones
     :param flat_mode: flat mode flag
+    :param validate_suffix: validate chord quality suffix
     """
     _validate_chords(chords)
     _validate_semitones(semitones)
     result = []
     for chord in chords:
         try:
-            result.append(str(Chord.from_string(chord, validate_suffix=False).transpose(semitones, flat_mode)))
+            result.append(str(Chord.from_string(chord, validate_suffix=validate_suffix).transpose(semitones, flat_mode)))
         except Exception:
             raise CapoValidationError(CHORD_FORMAT_ERROR_MESSAGE.format(chord=chord))
     return result

@@ -140,7 +140,7 @@ def sharp_to_flat(chords: List[str], validate_suffix: bool = True) -> List[str]:
     :param chords: chords list
     :param validate_suffix: validate chord quality suffix
     """
-    return transpose(chords, semitones=0, flat_mode=True, validate_suffix: bool = True)
+    return transpose(chords, semitones=0, flat_mode=True, validate_suffix=validate_suffix)
 
 
 def flat_to_sharp(chords: List[str], validate_suffix: bool = True) -> List[str]:
@@ -150,4 +150,4 @@ def flat_to_sharp(chords: List[str], validate_suffix: bool = True) -> List[str]:
     :param chords: chords list
     :param validate_suffix: validate chord quality suffix
     """
-    return transpose(chords, semitones=0, flat_mode=False, validate_suffix: bool = True)
+    return transpose(chords, semitones=0, flat_mode=False, validate_suffix=validate_suffix)
